@@ -1,1 +1,1 @@
-test
+Discord Poong Bot
