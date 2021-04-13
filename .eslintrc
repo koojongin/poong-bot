@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "import/prefer-default-export": "off",
+    "no-shadow": "off",
+    "camelcase": "off",
+    "max-len": "off",
+    "import/extensions": "off",
+    "import/no-cycle": "off",
+    "radix": "off",
+    "import/order": "off"
+  }
+}

@@ -1,13 +1,13 @@
 let Client;
 
 function getClient() {
-    return Client;
+  return Client;
 }
 
 function setClient(client) {
-    Client = client;
+  Client = client;
 }
 
 export {
-    getClient, setClient
-}
+  getClient, setClient,
+};

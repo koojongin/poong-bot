@@ -9,30 +9,29 @@ import * as GetVideos from './GetVideos.js';
 import * as ShortCutStreamerNickname from './ShortCutStreamerNickname.js';
 
 const commands = {
-    ShowCommands,
-    StreamInformation,
-    UserInformation,
-    // HelloVerification,
-    BotInformation,
-    GetClip,
-    PopularStream,
-    GetVideos,
-    ShortCutStreamerNickname,
-}
-
-const mapping = (command) => {
-    let maps = {};
-    Object.keys(commands).forEach((key) => {
-        let instance = commands[key];
-        const commandList = instance['commands'] || [];
-        commandList.forEach((commandName) => {
-            maps[commandName] = commands[key];
-        })
-    })
-    return maps[command];
-}
-
-export {
-    mapping, commands
+  ShowCommands,
+  StreamInformation,
+  UserInformation,
+  // HelloVerification,
+  BotInformation,
+  GetClip,
+  PopularStream,
+  GetVideos,
+  ShortCutStreamerNickname,
 };
 
+const mapping = (command) => {
+  const maps = {};
+  Object.keys(commands).forEach((key) => {
+    const instance = commands[key];
+    const commandList = instance.commands || [];
+    commandList.forEach((commandName) => {
+      maps[commandName] = commands[key];
+    });
+  });
+  return maps[command];
+};
+
+export {
+  mapping, commands,
+};
