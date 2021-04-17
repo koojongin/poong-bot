@@ -6,6 +6,8 @@ import * as StreamService from './StreamService.js';
 import 'moment-timezone';
 import { getStreamByUser } from './DiscordService.js';
 
+import http from 'http';
+
 moment.tz.setDefault('Asia/Seoul');
 
 const watchStreamer = [
@@ -13,15 +15,6 @@ const watchStreamer = [
 ];
 
 const storedStream = {};
-
-async function watchTwitchStreaming() {
-  // getStreamInformation('hanryang1125')
-  cron.schedule('*/1 * * * *', async () => {
-    watchStreamer.forEach((streamerId) => {
-      TwitchAPIService.getStreamInformation(streamerId);
-    });
-  });
-}
 
 async function getStreamInformation(userId) {
   const { body } = await TwitchAPIService.getStreamInformation({ userId });
@@ -64,7 +57,18 @@ async function getStreamInformation(userId) {
     isNotified: true,
   };
 }
-
+async function awakeHeroku() {
+  return http.get('http://poong-bot.herokuapp.com/');
+}
+async function watchTwitchStreaming() {
+  // getStreamInformation('hanryang1125')
+  cron.schedule('*/1 * * * *', async () => {
+    awakeHeroku();
+    watchStreamer.forEach((streamerId) => {
+      getStreamInformation(streamerId);
+    });
+  });
+}
 export {
   watchTwitchStreaming,
 };
