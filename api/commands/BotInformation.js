@@ -13,8 +13,10 @@ async function execute({ msg, client, actionMessage }) {
   const embedMessage = new Discord.MessageEmbed();
   let description = '';
   const parsedData = guilds.map((guild, index) => {
-    const { name, id, joinedTimestamp } = guild;
-    return `${(index + 1)}. ${name} [${moment(joinedTimestamp).toLocaleString()}]`;
+    const {
+      name, id, joinedTimestamp, memberCount,
+    } = guild;
+    return `${(index + 1)}. ${name} (${memberCount.toLocaleString()}명) \`${moment(joinedTimestamp).toLocaleString()}\``;
   });
   description = `${parsedData.join('\n')}`;
   embedMessage.setDescription(description);

@@ -13,7 +13,7 @@ async function execute({ msg, client, actionMessage }) {
 
   const parsedCommandListMessage = commandList.map((commandName) => `\`${commandName}\``).join(' ');
   const message = `명령어는 아래 링크를 참고해주세요.
-        http://poongbot.herokuapp.com/
+        http://poong-bot.herokuapp.com/
         ${parsedCommandListMessage}`;
   msg.reply(message);
 }
