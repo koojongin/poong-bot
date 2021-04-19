@@ -9,6 +9,7 @@ import * as GetVideos from './GetVideos.js';
 import * as ShortCutStreamerNickname from './ShortCutStreamerNickname.js';
 import * as ShowTogether from './ShowTogether.js';
 import * as ShowUptime from './ShowUptime.js';
+import * as ShowHotclip from './ShowHotclip.js';
 
 const commands = {
   ShowCommands,
@@ -22,6 +23,7 @@ const commands = {
   ShortCutStreamerNickname,
   ShowTogether,
   ShowUptime,
+  ShowHotclip,
 };
 
 const mapping = (command) => {
