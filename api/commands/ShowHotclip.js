@@ -16,31 +16,38 @@ async function execute({ msg, client, actionMessage }) {
   if (_.isNumber(+actionMessage) && !_.isEmpty(actionMessage)) {
     page = (+actionMessage);
   }
+  let clipsElements;
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const { body } = await got.get('clips', {
+      prefixUrl: 'https://tgd.kr',
+      // responseType: 'json',
+      // headers: {
+      //   'Client-Id': TWITCH_BOT_CLIENT_ID,
+      //   Authorization: `Bearer ${ACCESS_TOKEN}`,
+      // },
+    });
 
-  const { body } = await got.get('clips', {
-    prefixUrl: 'https://tgd.kr',
-    // responseType: 'json',
-    // headers: {
-    //   'Client-Id': TWITCH_BOT_CLIENT_ID,
-    //   Authorization: `Bearer ${ACCESS_TOKEN}`,
-    // },
-  });
-
-  const $ = cheerio.load(body).root();
-  const clipsElements = $.find('.clips');
+    const $ = cheerio.load(body).root();
+    clipsElements = $.find('.clips');
+  } catch (error) {
+    throw error;
+  }
 
   let description = '';
   let embedMessage;
   if (actionMessage === '') {
+    description += '```';
     clipsElements.toArray().forEach((clip, index) => {
       const title = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('alt');
       const streamerId = cheerio.load(clip).root().find('.clip-title .streamer').text();
       const clipLink = cheerio.load(clip).root().find('.clip-title .clip-launch').attr('href');
       const thumbnailUrl = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('src');
       // description += `${index + 1}. ${streamerId} [${title}](https://tgd.kr${clipLink})`;
-      description += `${index + 1}. ${streamerId} ${title}`;
+      description += `${index + 1}. ${streamerId} - ${title}`;
       description += '\n';
     });
+    description += '```';
     embedMessage = new Discord.MessageEmbed()
       .setTitle('일일 핫클립')
       .setColor('#d22ef1')
