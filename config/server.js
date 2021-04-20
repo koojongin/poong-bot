@@ -1,4 +1,5 @@
 import express from 'express';
+import * as https from 'https';
 import * as http from 'http';
 
 function listen({ port = 3000 }) {
@@ -7,8 +8,8 @@ function listen({ port = 3000 }) {
   //
   const app = express();
   // const bodyParser = require('body-parser')
-  app.use(express.static('static'));
 
+  app.use(express.static('static'));
   // parse application/x-www-form-urlencoded
   // app.use(bodyParser.urlencoded({extended: false}));
 
