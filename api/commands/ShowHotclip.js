@@ -16,7 +16,9 @@ async function test() {
   const options = {
     host: 'tgd.kr',
     path: '/clips/lists/2',
-    localAddress: '118.103.202.102', // IP address network interface
+    port: '9999',
+    // localAddress: '118.103.202.102', // IP address network interface
+    localAddress: '119.28.155.202', // IP address network interface
   };
   return new Promise((resolve, reject) => {
     let data = '';
