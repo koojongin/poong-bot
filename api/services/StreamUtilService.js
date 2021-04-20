@@ -41,6 +41,7 @@ const dictionary = {
   lck: 'lck_korea',
   마젠타: 'magenta62',
   케인: 'kanetv8',
+  한갱: 'woohankyung',
 };
 
 function convertByNickname(nickname) {

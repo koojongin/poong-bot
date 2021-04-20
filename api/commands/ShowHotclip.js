@@ -11,6 +11,17 @@ import _ from 'lodash';
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['핫클립'];
 
+function getClipData(clip) {
+  const title = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('alt');
+  const streamerId = cheerio.load(clip).root().find('.clip-title .streamer').text();
+  const clipLink = cheerio.load(clip).root().find('.clip-title .clip-launch').attr('href');
+  const thumbnailUrl = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('src');
+  const ago = cheerio.load(clip).root().find('.ago').text();
+  return {
+    title, streamerId, clipLink, thumbnailUrl, ago,
+  };
+}
+
 async function execute({ msg, client, actionMessage }) {
   let page = 1;
   if (_.isNumber(+actionMessage) && !_.isEmpty(actionMessage)) {
@@ -19,17 +30,14 @@ async function execute({ msg, client, actionMessage }) {
   let clipsElements;
   // eslint-disable-next-line no-useless-catch
   try {
-    const { body } = await got.get('clips', {
-      prefixUrl: 'https://tgd.kr',
-      // responseType: 'json',
-      // headers: {
-      //   'Client-Id': TWITCH_BOT_CLIENT_ID,
-      //   Authorization: `Bearer ${ACCESS_TOKEN}`,
-      // },
-    });
+    const [res, res2] = await Promise.all([
+      got.get('clips', { prefixUrl: 'https://tgd.kr' }),
+      got.get('clips/lists/2', { prefixUrl: 'https://tgd.kr' }),
+    ]);
 
-    const $ = cheerio.load(body).root();
-    clipsElements = $.find('.clips');
+    const clipsElements1 = cheerio.load(res.body).root().find('.clips').toArray();
+    const clipsElements2 = cheerio.load(res2.body).root().find('.clips').toArray();
+    clipsElements = [...clipsElements1, ...clipsElements2];
   } catch (error) {
     throw error;
   }
@@ -38,11 +46,10 @@ async function execute({ msg, client, actionMessage }) {
   let embedMessage;
   if (actionMessage === '') {
     description += '```';
-    clipsElements.toArray().forEach((clip, index) => {
-      const title = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('alt');
-      const streamerId = cheerio.load(clip).root().find('.clip-title .streamer').text();
-      const clipLink = cheerio.load(clip).root().find('.clip-title .clip-launch').attr('href');
-      const thumbnailUrl = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('src');
+    clipsElements.forEach((clip, index) => {
+      const {
+        title, streamerId, clipLink, thumbnailUrl,
+      } = getClipData(clip);
       // description += `${index + 1}. ${streamerId} [${title}](https://tgd.kr${clipLink})`;
       description += `${index + 1}. ${streamerId} - ${title}`;
       description += '\n';
@@ -53,11 +60,11 @@ async function execute({ msg, client, actionMessage }) {
       .setColor('#d22ef1')
       .setDescription(description);
   } else {
-    const clip = clipsElements.get(page - 1);
-    const title = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('alt');
-    const streamerId = cheerio.load(clip).root().find('.clip-title .streamer').text();
-    const clipLink = cheerio.load(clip).root().find('.clip-title .clip-launch').attr('href');
-    const thumbnailUrl = cheerio.load(clip).root().find('.img-container .clips-thumbnail').attr('src');
+    const clip = clipsElements[(page - 1)];
+    if (!clip) throw new Error('해당 클립이 없습니다.');
+    const {
+      title, streamerId, clipLink, thumbnailUrl,
+    } = getClipData(clip);
     description += `${page}. ${streamerId} [${title}](https://tgd.kr${clipLink})`;
     // description += `${page}. ${streamerId} ${title}`;
     description += '\n';

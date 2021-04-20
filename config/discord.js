@@ -52,7 +52,7 @@ function listen() {
           });
         } catch (error) {
           console.error(error);
-          await msg.reply('기대되지않은 에러입니다. 관리자에게 문의하세요');
+          await msg.reply((error && error.message) || '기대되지않은 에러입니다. 관리자에게 문의하세요');
           throw error;
         }
       }
