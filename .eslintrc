@@ -12,6 +12,6 @@
     "import/extensions": "off",
     "import/no-cycle": "off",
     "radix": "off",
-    "import/order": "off"
+    "import/order": "off",
   }
 }

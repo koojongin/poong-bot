@@ -69,8 +69,20 @@ async function getPopularStreams() {
   }).then((r) => r.body);
 }
 
-async function getClips({ userId, first = 10 }) {
+async function getClips({
+  userId, first = 10, startedAt, endedAt,
+}) {
   const uri = 'clips';
+  const searchParams = {
+    first,
+    broadcaster_id: userId,
+  };
+
+  if (startedAt && endedAt) {
+    searchParams.started_at = startedAt;
+    searchParams.ended_at = endedAt;
+  }
+
   return got.get(uri, {
     prefixUrl: TWITCH_API_DOMAIN,
     responseType: 'json',
@@ -78,10 +90,7 @@ async function getClips({ userId, first = 10 }) {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
       Authorization: `Bearer ${ACCESS_TOKEN}`,
     },
-    searchParams: {
-      first,
-      broadcaster_id: userId,
-    },
+    searchParams,
   });
 }
 

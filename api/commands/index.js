@@ -4,6 +4,8 @@ import * as UserInformation from './UserInformation.js';
 import * as HelloVerification from './HelloVerification.js';
 import * as BotInformation from './BotInformation.js';
 import * as GetClip from './GetClip.js';
+import * as GetClipPerDay from './GetClipPerDay.js';
+import * as GetClipPerWeek from './GetClipPerWeek.js';
 import * as PopularStream from './PopularStream.js';
 import * as GetVideos from './GetVideos.js';
 import * as ShortCutStreamerNickname from './ShortCutStreamerNickname.js';
@@ -18,6 +20,8 @@ const commands = {
   // HelloVerification,
   BotInformation,
   GetClip,
+  GetClipPerDay,
+  GetClipPerWeek,
   PopularStream,
   GetVideos,
   ShortCutStreamerNickname,

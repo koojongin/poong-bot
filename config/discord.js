@@ -57,7 +57,6 @@ function listen() {
         }
       }
     });
-
     client.login(DISCORD_TOKEN);
   });
 }
