@@ -11,7 +11,8 @@ import http from 'http';
 moment.tz.setDefault('Asia/Seoul');
 
 const watchStreamer = [
-  'hanryang1125','yapyap30'
+  'hanryang1125', 'yapyap30',
+  'saddummy', 'lovelyyeon',
 ];
 
 const storedStream = {};
