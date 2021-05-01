@@ -37,7 +37,7 @@ async function execute({ msg, client, actionMessage }) {
       const contentMaxLength = 24;
       let datumMessage = '';
       const streamTitle = `${title.length <= contentMaxLength + 2 ? title : title.substr(0, contentMaxLength).concat('..')}`;
-      datumMessage += `${index + 1}. \`${broadcaster.displayName} (${viewersCount.toLocaleString()})\``;
+      datumMessage += `${index + 1}. \`${broadcaster.displayName}(${broadcaster.login}) (${viewersCount.toLocaleString()})\``;
       // datumMessage += ` **[${streamTitle}](https://twitch.tv/${broadcaster.login})**`;
       datumMessage += ` **${streamTitle}**`;
       datumMessage += '\n';

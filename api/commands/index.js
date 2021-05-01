@@ -6,12 +6,14 @@ import * as BotInformation from './BotInformation.js';
 import * as GetClip from './GetClip.js';
 import * as GetClipPerDay from './GetClipPerDay.js';
 import * as GetClipPerWeek from './GetClipPerWeek.js';
+import * as GetClipPerMonth from './GetClipPerMonth.js';
 import * as PopularStream from './PopularStream.js';
 import * as GetVideos from './GetVideos.js';
 import * as ShortCutStreamerNickname from './ShortCutStreamerNickname.js';
 import * as ShowTogether from './ShowTogether.js';
 import * as ShowUptime from './ShowUptime.js';
 import * as ShowHotclip from './ShowHotclip.js';
+import * as SearchImage from './SearchImage.js';
 
 const commands = {
   ShowCommands,
@@ -22,12 +24,14 @@ const commands = {
   GetClip,
   GetClipPerDay,
   GetClipPerWeek,
+  GetClipPerMonth,
   PopularStream,
   GetVideos,
   ShortCutStreamerNickname,
   ShowTogether,
   ShowUptime,
   ShowHotclip,
+  SearchImage,
 };
 
 const mapping = (command) => {
