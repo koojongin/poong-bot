@@ -3,6 +3,7 @@ import * as TwitchAPIService from './TwitchAPIService.js';
 import * as CONSTANT from '../../config/constants.js';
 import moment from 'moment';
 import * as Discord from 'discord.js';
+import got from 'got';
 
 async function getStreamByUser({ userIdOrNicknameShotcut }) {
   const userId = StreamUtilService.convertByNickname(userIdOrNicknameShotcut) || CONSTANT.DEFAULT_USERID;

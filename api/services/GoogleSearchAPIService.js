@@ -8,18 +8,6 @@ const { CUSTOM_API_SECRET_KEY } = process.env;
 
 async function customSearchImage({ keyword }) {
   const uri = `${CUSTOM_SEARCH_API_URL}`;
-  // const options = {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'text/html; charset=UTF-8',
-  //   },
-  //   qs: {
-  //     q: keyword,
-  //     key: CUSTOM_API_SECRET_KEY,
-  //     cx: CUSTOM_API_PROJECT_KEY,
-  //   },
-  //   json: true,
-  // };
 
   const { body } = await got.get(uri, {
     headers: {
