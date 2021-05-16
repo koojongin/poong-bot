@@ -1,4 +1,4 @@
-import cron from 'node-cron';
+import cron from 'cron';
 import moment from 'moment';
 import * as TwitchAPIService from './TwitchAPIService.js';
 import * as StreamService from './StreamService.js';
@@ -9,6 +9,7 @@ import { getStreamByUser } from './DiscordService.js';
 import http from 'http';
 
 moment.tz.setDefault('Asia/Seoul');
+const { CronJob } = cron;
 
 const watchStreamer = [
   'hanryang1125', 'yapyap30', 'kimdoe', 'ok_ja',
@@ -59,18 +60,23 @@ async function getStreamInformation(userId) {
     isNotified: true,
   };
 }
+
 async function awakeHeroku() {
   return http.get('http://poong-bot.herokuapp.com/');
 }
+
 async function watchTwitchStreaming() {
   // getStreamInformation('hanryang1125')
-  cron.schedule('*/1 * * * *', async () => {
+
+  const job = new CronJob('0 */1 12-23 * * *', async () => {
     awakeHeroku();
     watchStreamer.forEach((streamerId) => {
       getStreamInformation(streamerId);
     });
-  });
+  }, null, true, 'Asia/Seoul');
+  job.start();
 }
+
 export {
   watchTwitchStreaming,
 };
