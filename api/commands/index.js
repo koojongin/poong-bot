@@ -14,6 +14,7 @@ import * as ShowTogether from './ShowTogether.js';
 import * as ShowUptime from './ShowUptime.js';
 import * as ShowHotclip from './ShowHotclip.js';
 import * as SearchImage from './SearchImage.js';
+import * as ShowPlaytime from './ShowPlaytime.js';
 
 const commands = {
   ShowCommands,
@@ -32,6 +33,7 @@ const commands = {
   ShowUptime,
   ShowHotclip,
   SearchImage,
+  ShowPlaytime,
 };
 
 const mapping = (command) => {
