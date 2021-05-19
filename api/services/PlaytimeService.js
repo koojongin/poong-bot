@@ -4,20 +4,12 @@ import fs from 'fs';
 
 async function getPlaytime({ gameName }) {
   const uri = 'https://howlongtobeat.com/search_results?page=1';
-  const rawBody = {
-    queryString: gameName,
-    t: 'games',
-    sorthead: 'popular',
-    sortd: 'Normal Order',
-    length_type: 'main',
-    randomize: '0',
-  };
   const form = new FormData();
   form.append('queryString', gameName);
   form.append('t', 'games');
-  form.append('sorthead', 'popular');
-  form.append('sortd', 'Normal Order');
-  form.append('length_type', 'main');
+  // form.append('sorthead', 'popular');
+  // form.append('sortd', 'Normal Order');
+  // form.append('length_type', 'main');
   return got.post(uri, {
     headers: {
       // 'content-type': 'application/x-www-form-urlencoded',

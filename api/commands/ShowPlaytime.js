@@ -12,26 +12,25 @@ async function execute({ msg, client, actionMessage }) {
   const document = cheerio.load(res).root();
   const elementsBeforeParse = document.find('.search_list_details').toArray().map((element) => cheerio.load(element).root());
   const elements = elementsBeforeParse.map((element) => {
-    const title = element.find('a[title]').text();
+    const result = {
+      title: '', data: [],
+    };
+    result.title = element.find('a[title]').text();
     const data = element.find('.search_list_details_block div').text().trim().replace(/\n/gi, '')
       .split('\t\t\t\t\t\t\t\t');
-    const [d1, d2, d3, d4, ...rest] = data;
-    const mainTime = d2.replace(/\t/gi, '');
-    const fullTime = d4.replace(/\t/gi, '');
-    return {
-      title, mainTime, fullTime,
-    };
+    result.data = data.filter((r) => !!r).map((d) => d.replace(/\t/gi, ''));
+    return result;
   });
 
   if (elements.length === 0) return msg.reply(`검색결과가 없습니다. \`${actionMessage}\``);
   const embedMessage = new Discord.MessageEmbed();
   let desc = '.\n';
   desc += elements.map((element, index) => {
-    const { mainTime, fullTime } = element;
+    const { title, data } = element;
     let result = '';
     result += `${index + 1}.`;
-    result += `${element.title}`;
-    result += `(메인:${mainTime} / 메인+서버:${fullTime})`;
+    result += `\`${title}\``;
+    result += `__${data[0]}__:${data[1]} | ${data[2] ? `__${data[2]}__:${data[3]}` : ''})`;
     result += '\n';
     return result;
   }).join('');
