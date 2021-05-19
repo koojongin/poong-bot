@@ -3,15 +3,19 @@ import * as Discord from 'discord.js';
 import * as COMMAND from '../api/commands/index.js';
 // eslint-disable-next-line import/extensions
 import * as StreamService from '../api/services/StreamService.js';
+import moment from 'moment';
 
 const {
   DS_USER_ACCESS_TOKEN,
   DISCORD_TOKEN,
+  ENV,
 } = process.env;
 const client = new Discord.Client();
 const BOT_COMMAND_PREFIX = '-';
 
 function listen() {
+  let isPauseListening = false;
+  let pausedAt = 0;
   return new Promise((resolve, reject) => {
     client.on('ready', () => {
       console.log('discord client on ready');
@@ -36,6 +40,15 @@ function listen() {
         msg.reply('pong');
       }
 
+      if (msg.content === 'pause-listen') {
+        if (ENV === 'HEROKU') {
+          isPauseListening = !isPauseListening;
+          pausedAt = new Date();
+          msg.reply(`puase:${isPauseListening} \`${moment(pausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
+        }
+      }
+
+      if (ENV === 'HEROKU' && isPauseListening) return;
       if (msg.content.indexOf('-') !== 0) return;
       const splittedMessage = msg.content.split(' ');
       const command = splittedMessage.splice(0, 1)
