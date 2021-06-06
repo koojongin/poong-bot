@@ -44,6 +44,7 @@ const dictionary = {
   한갱: 'woohankyung',
   릴펄: 'lilpearl_',
   수련수련: 'sooflower',
+  민땅: 'strawberry_bbubbbu'
 };
 
 function convertByNickname(nickname) {
