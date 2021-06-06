@@ -15,6 +15,7 @@ const watchStreamer = [
   'hanryang1125', 'yapyap30', 'kimdoe', 'ok_ja',
   'saddummy', 'lovelyyeon', '109ace',
   'beyou0728', 'kss7749', 'zilioner', 'hatsalsal', 'noizemasta', 'handongsuk',
+  'strawberry_bbubbbu'
 ];
 
 const storedStream = {};
