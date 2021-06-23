@@ -44,12 +44,12 @@ function listen() {
         if (ENV === 'HEROKU') {
           global.isPauseListening = !global.isPauseListening;
           if (!global.listenPausedAt) global.listenPausedAt = new Date();
-          msg.reply(`pause:${isPauseListening} \`last paused at : ${moment(pausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
+          msg.reply(`pause:${global.isPauseListening} \`last paused at : ${moment(pausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
           global.listenPausedAt = new Date();
         }
       }
 
-      if (ENV === 'HEROKU' && isPauseListening) return;
+      if (ENV === 'HEROKU' && global.isPauseListening) return;
       if (msg.content.indexOf('-') !== 0) return;
       const splittedMessage = msg.content.split(' ');
       const command = splittedMessage.splice(0, 1)
