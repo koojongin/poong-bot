@@ -14,8 +14,8 @@ const client = new Discord.Client();
 const BOT_COMMAND_PREFIX = '-';
 
 function listen() {
-  let isPauseListening = false;
-  let pausedAt = 0;
+  global.isPauseListening = false;
+  const pausedAt = 0;
   return new Promise((resolve, reject) => {
     client.on('ready', () => {
       console.log('discord client on ready');
@@ -42,9 +42,10 @@ function listen() {
 
       if (msg.content === 'pause-listen') {
         if (ENV === 'HEROKU') {
-          isPauseListening = !isPauseListening;
-          pausedAt = new Date();
-          msg.reply(`puase:${isPauseListening} \`${moment(pausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
+          global.isPauseListening = !global.isPauseListening;
+          if (!global.listenPausedAt) global.listenPausedAt = new Date();
+          msg.reply(`pause:${isPauseListening} \`last paused at : ${moment(pausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
+          global.listenPausedAt = new Date();
         }
       }
 

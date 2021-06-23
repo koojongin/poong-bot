@@ -15,7 +15,7 @@ const watchStreamer = [
   'hanryang1125', 'yapyap30', 'kimdoe', 'ok_ja',
   'saddummy', 'lovelyyeon', '109ace',
   'beyou0728', 'kss7749', 'zilioner', 'hatsalsal', 'noizemasta', 'handongsuk',
-  'strawberry_bbubbbu'
+  'strawberry_bbubbbu',
 ];
 
 const storedStream = {};
@@ -70,6 +70,7 @@ async function watchTwitchStreaming() {
   // getStreamInformation('hanryang1125')
 
   const job = new CronJob('0 */1 12-23 * * *', async () => {
+    if (global.isPauseListening) return;
     awakeHeroku();
     watchStreamer.forEach((streamerId) => {
       getStreamInformation(streamerId);
