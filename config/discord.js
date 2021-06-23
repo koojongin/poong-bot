@@ -44,7 +44,7 @@ function listen() {
         if (ENV === 'HEROKU') {
           global.isPauseListening = !global.isPauseListening;
           if (!global.listenPausedAt) global.listenPausedAt = new Date();
-          msg.reply(`pause:${global.isPauseListening} \`last paused at : ${moment(pausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
+          msg.reply(`pause:${global.isPauseListening} \`last paused at : ${moment(global.listenPausedAt).format('YYYY-MM-DD HH:mm:ss')}\``);
           global.listenPausedAt = new Date();
         }
       }
