@@ -70,10 +70,9 @@ async function watchTwitchStreaming() {
   // getStreamInformation('hanryang1125')
 
   const job = new CronJob('0 */1 12-23 * * *', async () => {
-    if (global.isPauseListening) return;
     awakeHeroku();
     watchStreamer.forEach((streamerId) => {
-      getStreamInformation(streamerId);
+      if (!global.isPauseListening) getStreamInformation(streamerId);
     });
   }, null, true, 'Asia/Seoul');
   job.start();
