@@ -1,26 +1,30 @@
 import * as Discord from 'discord.js';
 import moment from 'moment';
-import * as GoogleSearchAPIService from '../services/GoogleSearchAPIService.js';
 import 'moment-timezone';
-import _ from 'lodash';
-import FormData from 'form-data';
 import got from 'got';
 
 moment.tz.setDefault('Asia/Seoul');
-const commands = ['이미지'];
-
+const commands = ['박스오피스'];
+const { KOBIS_API_KEY } = process.env;
 async function execute({ msg, client, actionMessage }) {
   // const [actionUserId, page, ...actions] = actionMessage.split(' ');
-
-  const images = await GoogleSearchAPIService.customSearchImage({ keyword: actionMessage });
-  const selectedImage = images[Math.floor(Math.random() * images.length)];
-  if (selectedImage) {
+  // eslint-disable-next-line no-use-before-define
+  const { boxOfficeResult } = await getWeeklyBoxOfficeList();
+  const {
+    weeklyBoxOfficeList, yearWeekTime, showRange, boxofficeType,
+  } = boxOfficeResult;
+  if (boxOfficeResult) {
+    let description = '순위|개봉일|제목|관객수\n';
+    weeklyBoxOfficeList.forEach((movie) => {
+      description += `${movie.rank}. \`${movie.openDt}\` ${movie.movieNm} | ${parseInt(movie.audiAcc).toLocaleString()}명`;
+      description += '\n';
+    });
     const embedMessage = new Discord.MessageEmbed()
-      .setTitle(selectedImage.title)
-      .setURL(selectedImage.link)
-      .setAuthor(msg.author.username)
-      .setImage(selectedImage.url)
-      .setTimestamp();
+      .setTitle(`${boxofficeType} ${showRange}`)
+      .setDescription(description)
+      // .setURL(selectedImage.link)
+      .setAuthor(msg.author.username);
+      // .setImage(selectedImage.url)
     msg.reply(embedMessage);
   } else {
     msg.reply(`[${actionMessage}] 검색 결과가 없습니다.`);
@@ -29,13 +33,12 @@ async function execute({ msg, client, actionMessage }) {
 
 async function getWeeklyBoxOfficeList() {
   const uri = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json';
-
   return got.get(uri, {
     searchParams: {
-      q: {
-        key: 'f5eef3421c602c6cb7ea224104795888',
-        targetDt: '20120101',
-      },
+      key: KOBIS_API_KEY,
+      targetDt: moment().subtract('day', 1).format('YYYYMMDD'),
+      weekGb: '0',
+      itemPerPage: 30,
     },
     responseType: 'json',
   }).then((r) => r.body);
