@@ -3,11 +3,29 @@ import got from 'got';
 const TWITCH_API_DOMAIN = 'https://api.twitch.tv/helix';
 const {
   TWITCH_BOT_CLIENT_ID,
-  ACCESS_TOKEN,
-  TWITCH_USER_OAUTH,
+  TWITCH_BOT_CLIENT_SECRET,
   TIWTCH_USER_CLIENT_ID,
   TWITCH_USER_PREVIEW_CARD_OAUTH,
 } = process.env;
+
+async function setTwitchOAuth2Token() {
+  // eslint-disable-next-line no-use-before-define
+  const { body } = await getOAuth2Token();
+  const { access_token } = body;
+  global.TWITCH_API_ACCESS_TOKEN = access_token;
+}
+async function getOAuth2Token() {
+  const uri = 'https://id.twitch.tv/oauth2/token';
+  const searchParams = {
+    client_id: TWITCH_BOT_CLIENT_ID,
+    client_secret: TWITCH_BOT_CLIENT_SECRET,
+    grant_type: 'client_credentials',
+  };
+  return got.post(uri, {
+    searchParams,
+    responseType: 'json',
+  });
+}
 
 async function getPreviewCardByVideo(videoId) {
   const uri = 'https://gql.twitch.tv/gql';
@@ -88,7 +106,7 @@ async function getClips({
     responseType: 'json',
     headers: {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
     },
     searchParams,
   });
@@ -101,7 +119,7 @@ async function getVideos({ userId }) {
     responseType: 'json',
     headers: {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
     },
     searchParams: {
       user_id: userId,
@@ -116,7 +134,7 @@ async function getUserInformation({ userId }) {
     responseType: 'json',
     headers: {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
     },
   });
 }
@@ -128,7 +146,7 @@ async function getStreamInformation({ userId }) {
     responseType: 'json',
     headers: {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
     },
   });
 }
@@ -140,7 +158,7 @@ async function getGames({ gameId }) {
     responseType: 'json',
     headers: {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
     },
   });
 }
@@ -152,7 +170,7 @@ async function getFollows({ toId }) {
     responseType: 'json',
     headers: {
       'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
     },
     searchParams: {
       to_id: toId,
@@ -163,5 +181,5 @@ async function getFollows({ toId }) {
 export {
   getUserInformation, getStreamInformation, getClips
   , getPopularStreams, getVideos, getPreviewCardByVideo, getGames,
-  getFollows,
+  getFollows, getOAuth2Token, setTwitchOAuth2Token,
 };
