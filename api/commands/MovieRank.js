@@ -36,7 +36,7 @@ async function getWeeklyBoxOfficeList() {
   return got.get(uri, {
     searchParams: {
       key: KOBIS_API_KEY,
-      targetDt: moment().subtract('day', 1).format('YYYYMMDD'),
+      targetDt: moment().subtract('day', 6).format('YYYYMMDD'),
       weekGb: '0',
       itemPerPage: 30,
     },
