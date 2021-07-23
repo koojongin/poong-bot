@@ -88,7 +88,7 @@ function getMovieEmbedMessage({ movie }) {
   } = movie;
   // const fullImage = getImageLinkFromUrl(link);
   let description = '';
-  description += `[${pubDate}] ${title.replace('<b>', '').replace('</b>', '')} : ${subtitle}`;
+  description += `[${pubDate}] ${title.replace(/<b>/g, '').replace(/<\/b>/g, '')}(${subtitle})`;
   description += '\n\n';
   description += `감독 - ${director.split('|').join(',')}`;
   description += '\n';
