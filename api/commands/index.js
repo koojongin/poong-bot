@@ -16,6 +16,7 @@ import * as ShowHotclip from './ShowHotclip.js';
 import * as SearchImage from './SearchImage.js';
 import * as ShowPlaytime from './ShowPlaytime.js';
 import * as MovieRank from './MovieRank.js';
+import * as ShowMovie from './ShowMovie.js';
 
 const commands = {
   ShowCommands,
@@ -36,6 +37,7 @@ const commands = {
   SearchImage,
   ShowPlaytime,
   MovieRank,
+  ShowMovie,
 };
 
 const mapping = (command) => {

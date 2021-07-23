@@ -3,7 +3,6 @@ import 'moment-timezone';
 import 'moment-duration-format';
 import { getStreamByUser } from '../services/DiscordService.js';
 import { searchResultsPage } from '../services/GQLAPIService.js';
-import Discord from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 
