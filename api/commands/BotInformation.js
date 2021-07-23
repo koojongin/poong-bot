@@ -11,7 +11,7 @@ async function execute({ msg, client, actionMessage }) {
   const guilds = guildsCache.toJSON();
 
   const embedMessage = new Discord.MessageEmbed();
-  let description = '';
+  const description = '';
   const parsedData = guilds.map((guild, index) => {
     const {
       name, id, joinedTimestamp, memberCount,
@@ -22,7 +22,7 @@ async function execute({ msg, client, actionMessage }) {
   // description = `${guilds.length.toLocaleString()}개의 서버에서 ${usingMembers.toLocaleString()}명의 사용자가 사용중입니다.`;
   // embedMessage.setDescription(description);
   const test = await client.channels.fetch(client.guilds.cache.toJSON()[1].publicUpdatesChannelID);
-  embedMessage.setDescription(parsedData.join("\n"));
+  embedMessage.setDescription(parsedData.join('\n'));
   msg.reply(embedMessage);
 }
 
