@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as Discord from 'discord.js';
 import _ from 'lodash';
 import moment from 'moment';
@@ -10,7 +9,7 @@ import 'moment-timezone';
 const commands = ['정보'];
 
 async function execute({ msg, client, actionMessage }) {
-  const userId = StreamUtilService.convertByNickname(actionMessage) || CONSTANT.DEFAULT_USERID;
+  const userId = StreamUtilService.convertByNickname(actionMessage);
   const response = await TwitchAPIService.getUserInformation({ userId });
   const [data] = response.body.data;
   const {

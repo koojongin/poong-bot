@@ -9,7 +9,7 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
   const userId = StreamUtilService.convertByNickname(userIdOrNicknameShotcut) || CONSTANT.DEFAULT_USERID;
   const responseForStream = await TwitchAPIService.getStreamInformation({ userId });
   const [data] = responseForStream.body.data;
-  if (!data) return `${userId}님은 현재 방송 중이 아닙니다.`;
+  if (!data) { return { embedMessage: `${userId}님은 현재 방송 중이 아닙니다.`, isLive: false }; }
 
   const {
     game_id: gameId, started_at: streamStartedAt,
@@ -59,7 +59,7 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
     .setImage(`${videoThumbnailUrl.replace('{width}', '1920').replace('{height}', '1080')}?v=${new Date().getTime()}`)
     .setThumbnail(boxArtUrl)
     .setDescription(description);
-  return embedMessage;
+  return { embedMessage, isLive: true };
 }
 
 export {

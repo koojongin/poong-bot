@@ -53,7 +53,7 @@ async function getStreamInformation(userId) {
     .diff(started_at) / (1000 * 60);
   if (startAfterMinutes <= 5) {
     selectedChannel.send(`${user_name} 뱅온`);
-    const embedMessage = await getStreamByUser({ userIdOrNicknameShotcut: user_login });
+    const { embedMessage } = await getStreamByUser({ userIdOrNicknameShotcut: user_login });
     selectedChannel.send(embedMessage);
   }
   storedStream[userId] = {

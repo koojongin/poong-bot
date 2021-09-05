@@ -2,6 +2,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import 'moment-duration-format';
 import { getStreamByUser } from '../services/DiscordService.js';
+import * as UserInformationCommand from './UserInformation.js';
 import { searchResultsPage } from '../services/GQLAPIService.js';
 
 moment.tz.setDefault('Asia/Seoul');
@@ -15,13 +16,16 @@ async function execute({ msg, client, actionMessage }) {
   page = parseInt(page);
   let embedMessage;
   let savedUserId;
+  let isLive = false;
   try {
-    embedMessage = await getStreamByUser({ userIdOrNicknameShotcut: actionMessage });
+    const { embedMessage: em, isLive: _isLive } = await getStreamByUser({ userIdOrNicknameShotcut: actionUserId });
+    isLive = _isLive;
+    embedMessage = em;
   } catch (error) {
     if (error.response?.statusCode !== 400) {
       embedMessage = error.message;
     } else {
-      const edges = await getEdgesByNameOfUser({ actionMessage });
+      const edges = await getEdgesByNameOfUser({ actionMessage: actionUserId });
       const textLines = edges.splice(0, 5).map((edge, index) => {
         const {
           item: {
@@ -42,10 +46,11 @@ async function execute({ msg, client, actionMessage }) {
   }
 
   await msg.reply(embedMessage);
-  if (savedUserId) {
-    const emdbedMessage2nd = await getStreamByUser({ userIdOrNicknameShotcut: savedUserId });
-    msg.reply(emdbedMessage2nd);
+  if (savedUserId && isLive) {
+    return execute({ msg, client, actionMessage: savedUserId });
   }
+  await UserInformationCommand.execute({ msg, client, actionMessage: savedUserId || actionUserId });
+
   return true;
 }
 
@@ -56,6 +61,7 @@ async function getEdgesByNameOfUser({ actionMessage }) {
   } = searchFor;
   return channels.edges;
 }
+
 export {
   execute, commands,
 };

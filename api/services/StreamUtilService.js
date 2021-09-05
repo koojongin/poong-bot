@@ -44,10 +44,12 @@ const dictionary = {
   한갱: 'woohankyung',
   릴펄: 'lilpearl_',
   수련수련: 'sooflower',
-  민땅: 'strawberry_bbubbbu'
+  민땅: 'strawberry_bbubbbu',
 };
 
-function convertByNickname(nickname) {
+function convertByNickname(nickname = '풍월량') {
+  // eslint-disable-next-line no-param-reassign
+  if (nickname === '') nickname = '풍월량';
   const username = dictionary[nickname];
   return username || nickname;
 }
