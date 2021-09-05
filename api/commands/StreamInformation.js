@@ -9,6 +9,10 @@ moment.tz.setDefault('Asia/Seoul');
 const commands = ['방송'];
 
 async function execute({ msg, client, actionMessage }) {
+  // eslint-disable-next-line prefer-const
+  let [actionUserId, page, ...actions] = actionMessage.split(' ');
+  page = page || 1;
+  page = parseInt(page);
   let embedMessage;
   let savedUserId;
   try {
@@ -25,6 +29,7 @@ async function execute({ msg, client, actionMessage }) {
           },
         } = edge;
         if (index === 0) savedUserId = login;
+        if (index + 1 === page) savedUserId = login;
         return `${index + 1}. ${displayName}(${login}) | ${followers.totalCount.toLocaleString()}`;
       });
       let description = '```';
