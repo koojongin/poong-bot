@@ -10,9 +10,13 @@ const {
 
 async function setTwitchOAuth2Token() {
   // eslint-disable-next-line no-use-before-define
-  const { body } = await getOAuth2Token();
-  const { access_token } = body;
-  global.TWITCH_API_ACCESS_TOKEN = access_token;
+  try {
+    const { body } = await getOAuth2Token();
+    const { access_token } = body;
+    global.TWITCH_API_ACCESS_TOKEN = access_token;
+  } catch (error) {
+    console.log(error);
+  }
 }
 async function getOAuth2Token() {
   const uri = 'https://id.twitch.tv/oauth2/token';
@@ -90,6 +94,7 @@ async function getPopularStreams() {
 async function getClips({
   userId, first = 10, startedAt, endedAt,
 }) {
+  if (!userId) throw new Error('UserId 없음');
   const uri = 'clips';
   const searchParams = {
     first,
@@ -101,15 +106,20 @@ async function getClips({
     searchParams.ended_at = endedAt;
   }
 
-  return got.get(uri, {
-    prefixUrl: TWITCH_API_DOMAIN,
-    responseType: 'json',
-    headers: {
-      'Client-Id': TWITCH_BOT_CLIENT_ID,
-      Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
-    },
-    searchParams,
-  });
+  try {
+    const result = await got.get(uri, {
+      prefixUrl: TWITCH_API_DOMAIN,
+      responseType: 'json',
+      headers: {
+        'Client-Id': TWITCH_BOT_CLIENT_ID,
+        Authorization: `Bearer ${global.TWITCH_API_ACCESS_TOKEN}`,
+      },
+      searchParams,
+    });
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function getVideos({ userId }) {

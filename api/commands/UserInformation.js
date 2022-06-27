@@ -2,14 +2,13 @@ import * as Discord from 'discord.js';
 import _ from 'lodash';
 import moment from 'moment';
 import * as TwitchAPIService from '../services/TwitchAPIService.js';
-import * as CONSTANT from '../../config/constants.js';
 import * as StreamUtilService from '../services/StreamUtilService.js';
 import 'moment-timezone';
+import { getSearchedUserMessage } from '../services/TwitchUtilService.js';
 
 const commands = ['정보'];
 
-async function execute({ msg, client, actionMessage }) {
-  const userId = StreamUtilService.convertByNickname(actionMessage);
+async function getUserInfoMessage(userId) {
   const response = await TwitchAPIService.getUserInformation({ userId });
   const [data] = response.body.data;
   const {
@@ -40,7 +39,20 @@ async function execute({ msg, client, actionMessage }) {
   description += ' ';
   description += `__[인기클립](https://twitch.tv/${loginId}/clips?filter=clips&range=7d)__`;
   embedMessage.setDescription(description);
-  msg.reply(embedMessage);
+  return embedMessage;
+}
+
+async function execute({ msg, client, actionMessage }) {
+  const userId = StreamUtilService.convertByNickname(actionMessage);
+  try {
+    const embedMessage = await getUserInfoMessage(userId);
+    return msg.reply(embedMessage);
+  } catch (error) {
+    if (error?.response?.statusCode !== 400) return msg.reply(error.message);
+    const { savedUserId, description: embedMessage } = await getSearchedUserMessage(userId);
+    msg.reply(embedMessage);
+    return execute({ msg, client, actionMessage: savedUserId });
+  }
 }
 
 export {

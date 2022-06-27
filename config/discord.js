@@ -13,13 +13,21 @@ const {
 const client = new Discord.Client();
 const BOT_COMMAND_PREFIX = '-';
 
+function listenWithToken(token) {
+  return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-underscore-dangle
+    const _client = new Discord.Client();
+    _client.on('ready', () => resolve(_client));
+    _client.login(token);
+  });
+}
 function listen() {
   global.isPauseListening = false;
   const pausedAt = 0;
+  const TRASH_CHANNEL_ID = '750320503339876475';
   return new Promise((resolve, reject) => {
     client.on('ready', () => {
       console.log('discord client on ready');
-      const TRASH_CHANNEL_ID = '750320503339876475';
       client.channels
         .fetch(TRASH_CHANNEL_ID)
         .then((channel) => channel.send(`봇on!${new Date().toLocaleDateString()}${new Date().toLocaleTimeString()}`));
@@ -36,8 +44,47 @@ function listen() {
     });
 
     client.on('message', async (msg) => {
+      const {
+        channel, author, content, createdTimestamp,
+      } = msg;
+      const { name: channelName, guild: { name: guildName } } = channel;
+
+      const { username } = author;
+      console.log(`[${guildName}-#${channelName}]${username}[${new Date(createdTimestamp).toLocaleString()}] : ${content}`);
       if (msg.content === 'ping') {
         msg.reply('pong');
+      }
+
+      if (msg.content.indexOf('바테') >= 0) {
+        const [, limit = 10] = msg.content.split(' ');
+        const BOUND_GENERAL_CHANNEL_ID = '259295776063225866';
+        let testMessage;
+        // eslint-disable-next-line no-restricted-globals
+        if (isNaN(limit)) {
+          testMessage = limit;
+          const messageForSend = ('atlas has scheduled additional shard for performance optimization.');
+          client.channels.fetch(BOUND_GENERAL_CHANNEL_ID)
+            .then((channel) => {
+              console.log('sent');
+              return channel.send(messageForSend);
+            })
+            .then((r) => {
+              console.log(r);
+            });
+        }
+
+        client.channels
+          .fetch(BOUND_GENERAL_CHANNEL_ID)
+          .then((channel) => channel.messages.fetch({ limit }))
+          .then((messages) => {
+            console.log(messages);
+            console.log(`Received ${messages.size} messages`);
+            messages.forEach((message) => {
+              const { author, content, createdTimestamp } = message;
+              const { username } = author;
+              console.log(`${username}[${new Date(createdTimestamp).toLocaleString()}] : ${content}`);
+            });
+          });
       }
 
       if (msg.content === 'pause-listen') {
@@ -76,5 +123,5 @@ function listen() {
 }
 
 export {
-  listen,
+  listen, listenWithToken,
 };

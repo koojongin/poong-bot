@@ -87,7 +87,7 @@ async function execute({ msg, client, actionMessage }) {
     });
     description += '```';
     embedMessage = new Discord.MessageEmbed()
-      .setTitle('일일 핫클립')
+      .setTitle('일일 핫클립 https://tgd.kr/clips')
       .setColor('#d22ef1')
       .setDescription(description);
   } else {

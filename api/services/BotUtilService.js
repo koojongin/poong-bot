@@ -9,6 +9,9 @@ const numberToDayString = (_number) => {
     default:
       dayOfWeek = '';
       break;
+    case 0:
+      dayOfWeek = '일';
+      break;
     case 1:
       dayOfWeek = '월';
       break;

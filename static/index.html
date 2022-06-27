@@ -51,9 +51,14 @@
     </style>
 </head>
 <body>
-<div><h2>디스코드 풍봇 명령어 목록</h2></div>
+<div>
+    <img width=100 src="https://static-cdn.jtvnw.net/jtv_user_pictures/7d354ef2-b2a8-4276-8c12-5be7f6301ae0-profile_image-300x300.png">
+    <h2>디스코드 풍봇 명령어 목록</h2>
+</div>
 <div>Prefix : - (명령어 앞에 해당 특수문자를 붙여주세요. 예: -정보)</div>
 <p></p>
+자동화하기 귀찮으니 그냥 디코에 -명령 참조해주세요
+<a href="/message.html">서버별 메세지 로그 페이지로 이동 (비공개 처리된 채널은 가려져있습니다.)</a>
 <div class="command-list">
 
     <div class="command-wrap">
@@ -69,6 +74,8 @@
             <div>스트리머 프로필을 조회합니다.</div>
             <div>사용법 : 정보 [스트리머 아이디]</div>
             <div>예: -정보 hanryang1125</div>
+            <div>예시 2: -정보 풍월량 (대충 매칭되는거 찾아서 첫번째 걸린거 뿌립니다.)</div>
+            <div>예시 3: -정보 풍월량 3 (2번에서 검색된 리스트중 3번째를 선택합니다.)</div>
             <div>스트리머 아이디를 입력하지 않을 경우 디폴트로 풍월량을 검색합니다.</div>
         </div>
     </div>
@@ -77,12 +84,88 @@
         <div class="command-name">방송</div>
         <div class="command-desc">
             <div>스트리밍중인 방송 정보를 조회합니다.</div>
-            <div>사용법 : 정보 [스트리머 아이디]</div>
+            <div>사용법 : 방송 [스트리머 아이디]</div>
             <div>예: -방송 hanryang1125</div>
+            <div>예시 2: -방송 풍월량 (대충 매칭되는거 찾아서 첫번째 걸린거 뿌립니다.)</div>
+            <div>예시 3: -방송 풍월량 3 (2번에서 검색된 리스트중 3번째를 선택합니다.)</div>
             <div>스트리머 아이디를 입력하지 않을 경우 디폴트로 풍월량을 검색합니다.</div>
         </div>
     </div>
 
+    <div class="command-wrap">
+        <div class="command-name">핫클립</div>
+        <div class="command-desc">
+            <div>트게더 핫클립을 조회합니다.</div>
+            <div>사용법 : 핫클립 [순위번호]</div>
+            <div>예: -핫클립</div>
+            <div>예시 2: -핫클립 2 (핫클립 두번째 영상을 보여줍니다.)</div>
+        </div>
+    </div>
+
+    <div class="command-wrap">
+        <div class="command-name">다시보기</div>
+        <div class="command-desc">
+            <div>스트리머의 다시보기 목록을 조회합니다.</div>
+            <div>사용법 : 다시보기 [스트리머 아이디]</div>
+            <div>예: -다시보기</div>
+            <div>예시 2: -다시보기 풍월량</div>
+            <div>예시 2: -다시보기 풍월량 2 (최근으로부터 두번째 다시보기)</div>
+        </div>
+    </div>
+
+    <div class="command-wrap">
+        <div class="command-name">클립</div>
+        <div class="command-desc">
+            <div>스트리머의 클립 목록을 조회합니다.</div>
+            <div>사용법 : 클립 [스트리머 아이디]</div>
+            <div>예: -클립 (풍월량[디폴트] 전체 랜덤클립)</div>
+            <div>예시 2: -클립 풍월량 (특정 스트리머 전체 랜덤클립)</div>
+            <div>예시 2: -클립 풍월량 2 (특정 스트리머 조회순정렬 두번째 클립)</div>
+        </div>
+    </div>
+
+    <div class="command-wrap">
+        <div class="command-name">클립주</div>
+        <div class="command-desc">
+            <div>스트리머의 클립주간 목록을 조회합니다.</div>
+            <div>사용법 : 클립주 [스트리머 아이디]</div>
+            <div>예: -클립주 (풍월량[디폴트] 전체 랜덤클립)</div>
+            <div>예시 2: -클립주 풍월량 (특정 스트리머 전체 랜덤클립)</div>
+            <div>예시 2: -클립주 풍월량 2 (특정 스트리머 조회순정렬 두번째 클립)</div>
+        </div>
+    </div>
+
+    <div class="command-wrap">
+        <div class="command-name">클립월</div>
+        <div class="command-desc">
+            <div>스트리머의 클립월간 목록을 조회합니다.</div>
+            <div>사용법 : 클립월 [스트리머 아이디]</div>
+            <div>예: -클립월 (풍월량[디폴트] 전체 랜덤클립)</div>
+            <div>예시 2: -클립월 풍월량 (특정 스트리머 전체 랜덤클립)</div>
+            <div>예시 2: -클립월 풍월량 2 (특정 스트리머 조회순정렬 두번째 클립)</div>
+        </div>
+    </div>
+
+    <div class="command-wrap">
+        <div class="command-name">이미지</div>
+        <div class="command-desc">
+            <div>이미지 서치</div>
+            <div>사용법 : 이미지 [검색어]</div>
+            <div>예: -클립월 (풍월량[디폴트] 전체 랜덤클립)</div>
+        </div>
+    </div>
+
+    <div class="command-wrap">
+        <div class="command-name">인기</div>
+        <div class="command-desc">
+            <div>트위치 현재 실시간 시청자순 정렬 리스트</div>
+            <div>사용법 : 인기</div>
+            <div>예: -인기</div>
+        </div>
+    </div>
+
+
+    <div>기타 문의 - 디스코드 jiku90#8335</div>
 </div>
 </body>
 </html>

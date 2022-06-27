@@ -21,7 +21,7 @@ async function execute({ msg, client, actionMessage }) {
   // const usingMembers = guilds.map((guild) => guild.memberCount).reduce((current, next) => current + next);
   // description = `${guilds.length.toLocaleString()}개의 서버에서 ${usingMembers.toLocaleString()}명의 사용자가 사용중입니다.`;
   // embedMessage.setDescription(description);
-  const test = await client.channels.fetch(client.guilds.cache.toJSON()[1].publicUpdatesChannelID);
+  // const test = await client.channels.fetch(client.guilds.cache.toJSON()[1].publicUpdatesChannelID);
   embedMessage.setDescription(parsedData.join('\n'));
   msg.reply(embedMessage);
 }

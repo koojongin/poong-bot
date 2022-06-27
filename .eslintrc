@@ -1,9 +1,18 @@
 {
   "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
   "extends": [
     "airbnb",
     "airbnb/hooks"
   ],
+  "globals": {
+    "jQuery": true,
+    "$": true,
+    "moment": true
+  },
   "rules": {
     "no-unused-vars": "off",
     "import/prefer-default-export": "off",
@@ -15,6 +24,7 @@
     "radix": "off",
     "import/order": "off",
     "eslint-disable-next-line": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "import/no-unresolved": "off"
   }
 }

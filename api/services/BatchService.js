@@ -14,11 +14,11 @@ const { CronJob } = cron;
 const watchStreamer = [
   'hanryang1125', 'yapyap30', 'kimdoe', 'ok_ja',
   'saddummy', 'lovelyyeon', '109ace',
-  'beyou0728', 'kss7749', 'zilioner', 'hatsalsal', 'noizemasta', 'handongsuk',
-  'strawberry_bbubbbu',
+  'beyou0728', 'kss7749', 'zilioner', 'hatsalsal', 'noizemasta', 'handongsuk', 'suddenddong',
 ];
 
 const storedStream = {};
+const MY_SERVER_GENERAL_CHANNEL_ID = '683252977183621286';
 
 async function getStreamInformation(userId) {
   const { body } = await TwitchAPIService.getStreamInformation({ userId });
@@ -40,7 +40,14 @@ async function getStreamInformation(userId) {
 
   const client = StreamService.getClient();
   const selectedGuild = client.guilds.cache.find((data) => data.name === '곽씨와장씨');
-  const selectedChannel = await selectedGuild.channels.cache.find((data) => data.id === selectedGuild.systemChannelID);
+  // const selectedChannel = await selectedGuild.channels.cache.find((data) => data.id === selectedGuild.systemChannelID);
+  // const selectedChannel = await selectedGuild.channels.cache.find((channel) => channel.name === 'general');
+  const selectedGuilds = client.guilds.cache;
+  const selectedChannels = selectedGuilds.map((guild) => {
+    if (guild?.channels?.cache.length === 0) return null;
+    const channel = guild.channels.cache.find((channel) => channel.name === 'general' || channel.name === '일반');
+    return channel;
+  });
   if (!user_name) return;
 
   if (storedStream[userId]) {
@@ -49,17 +56,28 @@ async function getStreamInformation(userId) {
     }
   }
 
-  const startAfterMinutes = moment()
-    .diff(started_at) / (1000 * 60);
-  if (startAfterMinutes <= 5) {
-    selectedChannel.send(`${user_name} 뱅온`);
-    const { embedMessage } = await getStreamByUser({ userIdOrNicknameShotcut: user_login });
-    selectedChannel.send(embedMessage);
-  }
-  storedStream[userId] = {
-    streamedAt: started_at,
-    isNotified: true,
+  const { embedMessage } = await getStreamByUser({ userIdOrNicknameShotcut: user_login });
+
+  const send = async (selectedChannel) => {
+    const startAfterMinutes = moment()
+      .diff(started_at) / (1000 * 60);
+    if (startAfterMinutes <= 5 && !!selectedChannel) {
+      selectedChannel.send(`${user_name} 뱅온`);
+      selectedChannel.send(embedMessage);
+    }
+    storedStream[userId] = {
+      streamedAt: started_at,
+      isNotified: true,
+    };
   };
+
+  selectedChannels.filter((channel) => !!channel).forEach((channel) => {
+    try {
+      send(channel);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 }
 
 async function awakeHeroku() {

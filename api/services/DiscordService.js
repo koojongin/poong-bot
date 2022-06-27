@@ -21,7 +21,8 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
   const { body } = await TwitchAPIService.getGames({ gameId });
   const { data: gameData } = body;
   const [gameDatum] = gameData;
-  const boxArtUrl = gameDatum.box_art_url.replace('{width}', 285).replace('{height}', 380);
+  const { box_art_url = '' } = gameDatum;
+  const boxArtUrl = box_art_url.replace('{width}', 285).replace('{height}', 380);
 
   let description = `**${streamUserName}** - [${streamTitle}](https://twitch.tv/${streamUserLoginId})
                 **\`${streamGameName}\`** __${streamViewerCount.toLocaleString()}__명이 시청중
@@ -30,7 +31,7 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
 
   const { body: bodyForVideoResponse } = await TwitchAPIService.getVideos({ userId: streamUserId });
   const { data: dataForVideo } = bodyForVideoResponse || {};
-  if (dataForVideo) {
+  if (dataForVideo && dataForVideo.length > 0) {
     const [datum, ...restData] = dataForVideo;
     const videoId = datum.id;
     const { data: previewData } = await TwitchAPIService.getPreviewCardByVideo(videoId);

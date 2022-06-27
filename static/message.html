@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>풍봇</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.js" integrity="sha512-bqapgtfTAZwLEfvkONLanNjF3avvKbrcB55QT5I6FDx/N0n/oqpn99bjJVvHdYQsVEVY22ViXJdtdPJYWuY9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="messages.js"></script>
+    <style>
+        @font-face {
+            font-family: 'MaplestoryOTFLight';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            font-family: 'MaplestoryOTFLight';
+            word-break: break-all;
+        }
+        button{
+            border-width: 1px;
+            border-color: #c3c3c3;
+        }
+        img {max-width:100%}
+        .channels {
+            border-top-width: 1px;
+            border-top-color: #92acdb;
+            border-top-style: dashed;
+            padding-top: 5px;
+        }
+        .channels button{
+            margin-right:5px;
+            margin-bottom:5px;
+        }
+        .channels button.active{
+            background: #d5ffd0;
+            color: #23518b;
+            border: solid 2px #d5ffd0;
+        }
+        .guilds button{
+            margin-right:5px;
+            margin-bottom:5px;
+        }
+        .guilds button.active{
+            background: #859fe7;
+            color: white;
+            border: solid 1px #859fe7;
+        }
+        .embed-message{
+            background: #f4f4f4;
+            padding: 20px 13px;
+            border-radius: 5px;
+            white-space: break-spaces;
+            border-left-width: 5px;
+            border-left-style: solid;
+            display: flex;
+            flex-direction: column;
+        }
+        .embed-image img{
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .embed-desc{
+            align-items: flex-start;
+            display: flex;
+            justify-content: space-between;
+        }
+        .embed-desc img{
+            margin-left:20px;
+            width: 100px;
+            object-fit: contain;
+        }
+        .first-join {
+            background: #9c9c9c;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+        button {
+            display: inline-block;
+        }
+        .wrapper{
+            display:flex;
+            flex-direction: column;
+        }
+        .wrapper-message{
+            display:flex;
+            /*flex-direction: column;*/
+            /*justify-content: center;*/
+            align-items: flex-start;
+            margin-bottom:5px;
+        }
+        .text-line{
+            display:flex;
+            flex-direction: column;
+        }
+        .image-line img{
+            max-width: 100%;
+        }
+        .time-line{
+            display: flex;
+            align-items: center;
+            font-size:14px;
+        }
+        .username{
+            margin-right: 3px;
+            font-size: 16px;
+        }
+        .created{
+            color: #5e5e5e;
+            margin-right: 3px;
+            font-size:12px;
+        }
+        .user-thumbnail{
+            margin-right: 5px;
+            width:50px;
+            min-width:50px;
+            display: flex;
+        }
+        .user-thumbnail img{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper-guilds"></div>
+    <div class="wrapper">
+        <div class="wrapper-message">
+            <div class="message-line">
+                <div class="time-line"></div>
+                <div class="text-line"></div>
+            </div>
+            <div class="image-line"></div>
+        </div>
+    </div>
+</body>
+</html>
