@@ -16,6 +16,9 @@ import * as SearchImage from './SearchImage';
 import * as ShowPlaytime from './ShowPlaytime';
 import * as MovieRank from './MovieRank';
 import * as ShowMovie from './ShowMovie';
+import * as DictionaryFind from './DictionaryFind';
+import * as DictionaryFindOne from './DictionaryFindOne';
+import * as DictionarySave from './DictionarySave';
 
 const commands = {
   ShowCommands,
@@ -37,6 +40,9 @@ const commands = {
   ShowPlaytime,
   MovieRank,
   ShowMovie,
+  DictionaryFind,
+  DictionaryFindOne,
+  DictionarySave,
 };
 
 const mapping = (command) => {
