@@ -3,6 +3,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import got from 'got';
 import { getMovie } from '../services/NaverAPIService';
+import { MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['박스오피스'];
@@ -67,17 +68,15 @@ async function execute({ msg, client, actionMessage }) {
       }% | ${parseInt(movie.showCnt).toLocaleString()}`;
       description += '\n';
     });
-    const embedMessage = new Discord.MessageEmbed()
+    const embedMessage = new MessageEmbed()
       .setTitle(`${boxofficeType} ${showRange}`)
       .setDescription(description)
-      // .setURL(selectedImage.link)
       .setAuthor(msg.author.username);
-    // .setImage(selectedImage.url)
 
-    msg.reply(embedMessage);
+    msg.reply({ embeds: [embedMessage] });
     const movie = await getMovie({ movieName: firtstMovie.movieNm });
     const movieMessage = getMovieEmbedMessage({ movie });
-    msg.reply(movieMessage);
+    msg.reply({ embeds: [movieMessage] });
   } else {
     msg.reply(`[${actionMessage}] 검색 결과가 없습니다.`);
   }
@@ -97,7 +96,7 @@ function getMovieEmbedMessage({ movie }) {
   description += '\n';
   description += `${link}`;
   description += '\n';
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     // .setImage(`${fullImage}?v=${new Date().getTime()}`)
     .setThumbnail(image)

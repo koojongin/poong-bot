@@ -4,6 +4,7 @@ import * as TwitchAPIService from '../services/TwitchAPIService';
 import * as CONSTANT from '../../config/constants';
 import 'moment-timezone';
 import _ from 'lodash';
+import { MessageEmbed } from 'discord.js';
 
 const BOT_COMMAND_PREFIX = '-';
 
@@ -27,7 +28,7 @@ async function execute({ msg, client, actionMessage }) {
   const { edges: liveStreams } = streams;
 
   if (actionMessage === '') {
-    const embedMessage = new Discord.MessageEmbed();
+    const embedMessage = new MessageEmbed();
 
     const streamData = liveStreams.splice(0, 30).map((stream, index) => {
       const { previewImageURL, title, id, viewersCount, broadcaster, game } = stream.node;
@@ -49,9 +50,9 @@ async function execute({ msg, client, actionMessage }) {
     embedMessage.setTitle('한국 트위치 실시간 시청자 순위입니다.');
     embedMessage.setDescription(description);
 
-    msg.reply(embedMessage);
+    msg.reply({ embeds: [embedMessage] });
   } else {
-    const embedMessage = new Discord.MessageEmbed()
+    const embedMessage = new MessageEmbed()
       .setColor('#51ace8')
       .setTitle(`트위치 실시간 시청자수 TOP ${skip + 1}~${(page + 1) * limit}`);
     // .setImage(data.offline_image_url)
@@ -79,7 +80,7 @@ async function execute({ msg, client, actionMessage }) {
       'YYYY-MM-DD HH:mm:ss'
     )}\n[**[__더보기__]**](https://www.twitch.tv/directory/all?sort=VIEWER_COUNT)`;
     embedMessage.setDescription(description);
-    msg.reply(embedMessage);
+    msg.reply({ embeds: [embedMessage] });
   }
 }
 

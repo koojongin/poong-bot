@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import 'moment-timezone';
 import { getMovie } from '../services/NaverAPIService';
@@ -26,7 +26,7 @@ function getMovieEmbedMessage({ movie }) {
   description += '\n\n';
   description += `${link}`;
   description += '\n';
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     // .setImage(`${fullImage}?v=${new Date().getTime()}`)
     .setThumbnail(image)

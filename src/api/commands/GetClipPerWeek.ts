@@ -5,6 +5,7 @@ import * as CONSTANT from '../../config/constants';
 import * as StreamUtilService from '../services/StreamUtilService';
 import 'moment-timezone';
 import _ from 'lodash';
+import { MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['클립주'];
@@ -34,7 +35,7 @@ async function execute({ msg, client, actionMessage }) {
   const datum = data[selectedIndex];
   if (!datum)
     return msg.reply(`${user.display_name || userId}님의 클립이 없습니다. 총 ${data.length.toLocaleString()}개의 클립`);
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     .setImage(datum.thumbnail_url)
     .setTitle(`[주간핫클립] ${selectedIndex + 1}. ${datum.title}`)
@@ -51,7 +52,7 @@ async function execute({ msg, client, actionMessage }) {
     'YYYY-MM-DD HH:mm:ss'
   )}\``;
   embedMessage.setDescription(description);
-  return msg.reply(embedMessage);
+  return msg.reply({ embeds: [embedMessage] });
 }
 
 export { execute, commands };

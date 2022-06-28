@@ -18,7 +18,7 @@ async function execute({ msg, client, actionMessage }) {
 
   const { content, user } = dictionary;
   const { discriminator, username } = user;
-  const messages = [`\`[${actionMessage}]에 대한 검색결과입니다.\``, `\`${username}#${discriminator}\`: ${content}`];
+  const messages = [`"${actionMessage}" - \`${username}#${discriminator}\``, `${content}`];
   msg.reply(messages.join('\n'));
 }
 

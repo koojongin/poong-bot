@@ -7,11 +7,12 @@ import * as CONSTANT from '../../config/constants';
 
 import 'moment-timezone';
 import { getSearchedUserMessage } from '../services/TwitchUtilService';
+import { Message, MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 
 const commands = ['다시보기'];
-async function sendReplayList(videoList, user, msg, opts) {
+async function sendReplayList(videoList, user, msg: Message, opts) {
   const options = Object.assign(opts, {});
   const { userId } = options;
   const splicedData = videoList.slice(0, 5);
@@ -29,8 +30,7 @@ async function sendReplayList(videoList, user, msg, opts) {
     const innerVideos = edges.map((edge) => {
       const { node } = edge;
       const { durationMilliseconds: duration, description: chapterName } = node;
-      // const playtime = new Date(moment(duration)).toISOString().substr(11, 5);
-      const playtime = duration;
+      const playtime = moment.utc(duration).format('HH:mm:ss');
       return `${chapterName}(\`${playtime}\`)`;
     });
     let streamContainerString = `**[${index + 1}. ${streamedTime}](${
@@ -44,12 +44,12 @@ async function sendReplayList(videoList, user, msg, opts) {
     return streamContainerString;
   });
 
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     .setTitle(`${user.display_name || userId} 최근 다시보기 목록`)
     // .setThumbnail(user.profile_image_url)
     .setDescription(shorteningData.join('\n\n'));
-  return msg.reply(embedMessage);
+  return msg.reply({ embeds: [embedMessage] });
 }
 async function sendReplayOne(video, user, msg, opts) {
   const options = Object.assign(opts, {});
@@ -72,11 +72,10 @@ async function sendReplayOne(video, user, msg, opts) {
   edges.forEach((edge, index) => {
     const { node } = edge;
     const { durationMilliseconds: duration, type, description: chapterName, details, video }: any = node;
-    // const playtime = new Date(moment.duration(duration)).toISOString().substr(11, 8);
-    const playtime = duration;
+    const playtime = moment.utc(duration).format('HH:mm:ss');
     description += `\n${index + 1}. ${chapterName} \`${playtime}\``;
   });
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     .setImage(thumbnail)
     .setTitle(video.title)
@@ -84,7 +83,7 @@ async function sendReplayOne(video, user, msg, opts) {
     .setDescription(description).setFooter(`
                 최근 다시보기중 ${pageIndex + 1}번째 영상입니다.
             `);
-  return msg.reply(embedMessage);
+  return msg.reply({ embeds: [embedMessage] });
 }
 async function execute({ msg, client, actionMessage }) {
   const [actionMessageOfUserId, selectedPage, ...actions] = actionMessage.split(' ');

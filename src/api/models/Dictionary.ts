@@ -8,6 +8,7 @@ export interface IDictionary {
   updatedAt: Date;
   userId: string;
 
+  //virtual fields
   user?: IUser;
 }
 const schema = new Schema<IDictionary>({

@@ -19,6 +19,8 @@ import * as ShowMovie from './ShowMovie';
 import * as DictionaryFind from './DictionaryFind';
 import * as DictionaryFindOne from './DictionaryFindOne';
 import * as DictionarySave from './DictionarySave';
+import * as DictionaryUpdate from './DictionaryUpdate';
+import * as DictionaryDelete from './DictionaryDelete';
 
 const commands = {
   ShowCommands,
@@ -43,6 +45,8 @@ const commands = {
   DictionaryFind,
   DictionaryFindOne,
   DictionarySave,
+  DictionaryUpdate,
+  DictionaryDelete,
 };
 
 const mapping = (command) => {

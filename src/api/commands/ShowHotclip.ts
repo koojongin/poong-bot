@@ -5,6 +5,7 @@ import got from 'got';
 import cheerio from 'cheerio';
 import _ from 'lodash';
 import https from 'https';
+import { MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['핫클립'];
@@ -83,7 +84,7 @@ async function execute({ msg, client, actionMessage }) {
       description += '\n';
     });
     description += '```';
-    embedMessage = new Discord.MessageEmbed()
+    embedMessage = new MessageEmbed()
       .setTitle('일일 핫클립 https://tgd.kr/clips')
       .setColor('#d22ef1')
       .setDescription(description);
@@ -94,10 +95,10 @@ async function execute({ msg, client, actionMessage }) {
     description += `${page}. ${streamerId} [${title}](https://tgd.kr${clipLink})`;
     // description += `${page}. ${streamerId} ${title}`;
     description += '\n';
-    embedMessage = new Discord.MessageEmbed().setColor('#d22ef1').setImage(thumbnailUrl).setDescription(description);
+    embedMessage = new MessageEmbed().setColor('#d22ef1').setImage(thumbnailUrl).setDescription(description);
   }
 
-  return msg.reply(embedMessage);
+  return msg.reply({ embeds: [embedMessage] });
 }
 
 export { execute, commands };

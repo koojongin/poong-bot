@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import _ from 'lodash';
 import moment from 'moment';
 import * as TwitchAPIService from '../services/TwitchAPIService';
@@ -23,7 +23,7 @@ async function getUserInfoMessage(userId) {
   } = data;
   const responseOfGetFollows = await TwitchAPIService.getFollows({ toId: id });
   const { total, data: followData, pagination }: any = responseOfGetFollows.body;
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     .setImage(offline_image_url)
     .setFooter(`방송개시일 : ${moment(userCreatedAt).format('YYYY-MM-DD HH:mm:ss')}`)

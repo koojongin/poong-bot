@@ -6,6 +6,7 @@ import * as StreamUtilService from '../services/StreamUtilService';
 import 'moment-timezone';
 import _ from 'lodash';
 import { getSearchedUserMessage } from '../services/TwitchUtilService';
+import { MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['클립'];
@@ -25,7 +26,7 @@ async function getUserClipMessage(userId, page = 0) {
   const selectedIndex = pageNumber ? pageNumber - 1 : parseInt(String(Math.random() * data.length));
   const datum = data[selectedIndex];
   if (!datum) return null;
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     .setImage(datum.thumbnail_url)
     .setTitle(`${selectedIndex + 1}. ${datum.title}`)

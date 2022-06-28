@@ -3,6 +3,7 @@ import * as TwitchAPIService from './TwitchAPIService';
 import * as CONSTANT from '../../config/constants';
 import * as Discord from 'discord.js';
 import moment from 'moment/moment';
+import { MessageEmbed } from 'discord.js';
 
 async function getStreamByUser({ userIdOrNicknameShotcut }) {
   const userId = StreamUtilService.convertByNickname(userIdOrNicknameShotcut) || CONSTANT.DEFAULT_USERID;
@@ -54,21 +55,19 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
         details,
         video,
       } = node;
-      let playtime = new Date(moment(duration).toDate()).toISOString().substr(11, 8);
+      let playtime = moment.utc(duration).format('HH:mm:ss');
       let onAirMessage = '';
       if (duration === 0) {
         onAirMessage = ':arrow_forward:';
-        // video.lengthSeconds*1000 - positionMilliseconds
-        // playtime = moment().toDate().toISOString().substr(11, 8);
         const duration = moment.duration(video.lengthSeconds * 1000 - positionMilliseconds).as('milliseconds');
-        playtime = moment(duration).format('hh:mm:ss');
+        playtime = moment(duration).format('HH:mm:ss');
       }
       description += `\n${duration === 0 ? `${onAirMessage} ` : ''}${index + 1}. ${chapterName} \`${playtime}${
         onAirMessage ? ' ~ now' : ''
       }\``;
     });
   }
-  const embedMessage = new Discord.MessageEmbed()
+  const embedMessage = new MessageEmbed()
     .setColor('#51ace8')
     .setImage(`${videoThumbnailUrl.replace('{width}', '1920').replace('{height}', '1080')}?v=${new Date().getTime()}`)
     .setThumbnail(boxArtUrl)
