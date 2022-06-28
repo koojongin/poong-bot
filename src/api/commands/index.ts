@@ -1,0 +1,54 @@
+import * as ShowCommands from './ShowCommands';
+import * as StreamInformation from './StreamInformation';
+import * as UserInformation from './UserInformation';
+import * as BotInformation from './BotInformation';
+import * as GetClip from './GetClip';
+import * as GetClipPerDay from './GetClipPerDay';
+import * as GetClipPerWeek from './GetClipPerWeek';
+import * as GetClipPerMonth from './GetClipPerMonth';
+import * as PopularStream from './PopularStream';
+import * as GetVideos from './GetVideos';
+import * as ShortCutStreamerNickname from './ShortCutStreamerNickname';
+import * as ShowTogether from './ShowTogether';
+import * as ShowUptime from './ShowUptime';
+import * as ShowHotclip from './ShowHotclip';
+import * as SearchImage from './SearchImage';
+import * as ShowPlaytime from './ShowPlaytime';
+import * as MovieRank from './MovieRank';
+import * as ShowMovie from './ShowMovie';
+
+const commands = {
+  ShowCommands,
+  StreamInformation,
+  UserInformation,
+  // HelloVerification,
+  BotInformation,
+  GetClip,
+  GetClipPerDay,
+  GetClipPerWeek,
+  GetClipPerMonth,
+  PopularStream,
+  GetVideos,
+  ShortCutStreamerNickname,
+  ShowTogether,
+  ShowUptime,
+  ShowHotclip,
+  SearchImage,
+  ShowPlaytime,
+  MovieRank,
+  ShowMovie,
+};
+
+const mapping = (command) => {
+  const maps = {};
+  Object.keys(commands).forEach((key) => {
+    const instance = commands[key];
+    const commandList = instance.commands || [];
+    commandList.forEach((commandName) => {
+      maps[commandName] = commands[key];
+    });
+  });
+  return maps[command];
+};
+
+export { mapping, commands };

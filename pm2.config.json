@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "poong-bot",
+      "script": "dist/index.js",
+      "watch": false,
+      "autorestart": true
+    }
+  ]
+}
