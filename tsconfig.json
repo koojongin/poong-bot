@@ -4,8 +4,8 @@
     "./node_modules/@types"
   ],
   "compilerOptions": {
+    "skipLibCheck": true,
     "baseUrl": "./",
-
     "target": "es2015",
     "module": "commonjs",
     "outDir": "./dist",
