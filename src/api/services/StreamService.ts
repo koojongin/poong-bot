@@ -8,6 +8,4 @@ function setClient(client) {
   Client = client;
 }
 
-export {
-  getClient, setClient,
-};
+export { getClient, setClient };

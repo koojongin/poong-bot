@@ -4,6 +4,7 @@
     "./node_modules/@types"
   ],
   "compilerOptions": {
+    "allowJs": true,
     "skipLibCheck": true,
     "baseUrl": "./",
     "target": "es2015",

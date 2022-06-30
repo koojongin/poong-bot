@@ -14,8 +14,8 @@ async function execute({ msg, client, actionMessage }) {
     });
   // http://poong-bot.herokuapp.com/
   const parsedCommandListMessage = commandList.map((commandName) => `\`${commandName}\``).join(' ');
-  const message = `방송 알림을 끄려면 pause-listen를 입력하세요. 그외 문의\`jiku90#8335\` 명령어는 아래 링크를 참고해주세요.
-  http://jiku90.com:3000
+  // 방송 알림을 끄려면 pause-listen를 입력하세요. 그외 문의`jiku90#8335` 명령어는 아래 링크를 참고해주세요.
+  const message = `http://jiku90.com:3000
   ${parsedCommandListMessage}`;
   msg.reply(message);
 }

@@ -7,10 +7,10 @@ import * as CONSTANT from '../../config/constants';
 
 import 'moment-timezone';
 import { getSearchedUserMessage } from '../services/TwitchUtilService';
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, MessageActionRow, MessageEmbed, MessageSelectMenu, ModalActionRowComponent } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
-
+const result = {};
 const commands = ['다시보기'];
 async function sendReplayList(videoList, user, msg: Message, opts) {
   const options = Object.assign(opts, {});
@@ -49,9 +49,29 @@ async function sendReplayList(videoList, user, msg: Message, opts) {
     .setTitle(`${user.display_name || userId} 최근 다시보기 목록`)
     // .setThumbnail(user.profile_image_url)
     .setDescription(shorteningData.join('\n\n'));
+
+  const selectMenus = splicedData.map((datum) => {
+    const { title, created_at, url, view_count, duration } = datum;
+    return {
+      label: `${title}(${moment(created_at).format('YY/MM/DD HH:mm:ss')})`,
+      description: `${duration} (${view_count.toLocaleString()}views)`,
+      value: url,
+    };
+  });
+  // const row = new MessageActionRow<ModalActionRowComponent>().addComponents(
+  //   new MessageSelectMenu().setCustomId('select').setPlaceholder('Nothing selected').addOptions(selectMenus)
+  // );
+
+  // const now = new Date().getTime();
+  // result[now] = await Promise.all(
+  //   videoList.map((video) => {
+  //     return getReplayOne(video, user, opts);
+  //   })
+  // );
+
   return msg.reply({ embeds: [embedMessage] });
 }
-async function sendReplayOne(video, user, msg, opts) {
+async function getReplayOne(video, user, opts) {
   const options = Object.assign(opts, {});
   const { pageIndex = 0 } = options;
   const videoId = video.id;
@@ -83,7 +103,7 @@ async function sendReplayOne(video, user, msg, opts) {
     .setDescription(description).setFooter(`
                 최근 다시보기중 ${pageIndex + 1}번째 영상입니다.
             `);
-  return msg.reply({ embeds: [embedMessage] });
+  return { embedMessage };
 }
 async function execute({ msg, client, actionMessage }) {
   const [actionMessageOfUserId, selectedPage, ...actions] = actionMessage.split(' ');
@@ -99,7 +119,7 @@ async function execute({ msg, client, actionMessage }) {
   } catch (error) {
     if (error?.response?.statusCode !== 400) return msg.reply(error.message);
     const { savedUserId, description: embedMessage } = await getSearchedUserMessage(userId);
-    msg.reply(embedMessage);
+    msg.reply({ embeds: [embedMessage] });
     return execute({ msg, client, actionMessage: [savedUserId, selectedPage, ...actions].join(' ') });
   }
   const response = await TwitchAPIService.getVideos({ userId });
@@ -108,7 +128,8 @@ async function execute({ msg, client, actionMessage }) {
   const video = videoList[pageIndex];
   if (!video) return msg.reply(`${user.display_name || userId}님의 다시보기가 없습니다.`);
   if (!selectedPage) return sendReplayList(videoList, user, msg, { userId });
-  return sendReplayOne(video, user, msg, { pageIndex });
+  const { embedMessage } = await getReplayOne(video, user, { pageIndex });
+  return msg.reply({ embeds: [embedMessage] });
 }
 
 export { execute, commands };

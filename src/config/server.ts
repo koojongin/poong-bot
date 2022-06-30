@@ -31,7 +31,7 @@ function listenServer({ port = 3000, client, otherClients }) {
         .filter((data) => data.id !== MY_GUILD_ID)
         .map((guild) => {
           const { channels } = guild;
-          return { guild, channels: channels.cache };
+          return { guild, channels: channels._cache };
         });
       return result;
     };

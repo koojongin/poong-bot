@@ -44,7 +44,7 @@ async function execute({ msg, client, actionMessage }) {
   try {
     const { user, embedMessage } = await getUserClipMessage(userId, page);
     if (!embedMessage) msg.reply(`${user.display_name || userId}님의 클립이 없습니다.`);
-    return msg.reply(embedMessage);
+    return msg.reply({ embeds: [embedMessage] });
   } catch (error) {
     if (error?.response?.statusCode !== 400) return msg.reply(error.message);
     const { savedUserId, description: embedMessage } = await getSearchedUserMessage(actionUserId || userId);

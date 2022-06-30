@@ -8,6 +8,8 @@ import { getStreamByUser } from './DiscordService';
 
 import http from 'http';
 import { isPauseListening } from '../../config/config';
+import { ChannelTypes } from 'discord.js/typings/enums';
+import { MY_SERVER_GUILD_ID } from '../../config/constants';
 
 moment.tz.setDefault('Asia/Seoul');
 const { CronJob } = cron;
@@ -30,7 +32,6 @@ const watchStreamer = [
 ];
 
 const storedStream = {};
-const MY_SERVER_GENERAL_CHANNEL_ID = '683252977183621286';
 
 async function getStreamInformation(userId) {
   const { body }: any = await TwitchAPIService.getStreamInformation({ userId });
@@ -51,15 +52,20 @@ async function getStreamInformation(userId) {
   } = data;
 
   const client = StreamService.getClient();
-  const selectedGuild = client.guilds.cache.find((data) => data.name === '곽씨와장씨');
-  // const selectedChannel = await selectedGuild.channels.cache.find((data) => data.id === selectedGuild.systemChannelID);
-  // const selectedChannel = await selectedGuild.channels.cache.find((channel) => channel.name === 'general');
   const selectedGuilds = client.guilds.cache;
-  const selectedChannels = selectedGuilds.map((guild) => {
-    if (guild?.channels?.cache.length === 0) return null;
-    const channel = guild.channels.cache.find((channel) => channel.name === 'general' || channel.name === '일반');
-    return channel;
-  });
+  const selectedChannels = selectedGuilds
+    .map((guild) => {
+      if (guild?.channels?.cache.length === 0) return null;
+      const channel = guild.channels.cache.find((channel) => channel.name === 'general' || channel.name === '일반');
+      return channel;
+    })
+    .filter((channel) => {
+      if (!channel) return false;
+      const { type, guildId, id } = channel;
+      if (type !== 'GUILD_TEXT') return false;
+      if (guildId !== MY_SERVER_GUILD_ID) return false;
+      return true;
+    });
   if (!user_name) return;
 
   if (storedStream[userId]) {
@@ -74,7 +80,7 @@ async function getStreamInformation(userId) {
     const startAfterMinutes = moment().diff(started_at) / (1000 * 60);
     if (startAfterMinutes <= 5 && !!selectedChannel) {
       selectedChannel.send(`${user_name} 뱅온`);
-      selectedChannel.send(embedMessage);
+      selectedChannel.send({ embeds: [embedMessage] });
     }
     storedStream[userId] = {
       streamedAt: started_at,
@@ -98,8 +104,6 @@ async function awakeHeroku() {
 }
 
 async function watchTwitchStreaming() {
-  // getStreamInformation('hanryang1125')
-
   const job = new CronJob(
     '0 */1 12-23 * * *',
     async () => {

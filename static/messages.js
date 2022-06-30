@@ -4,7 +4,7 @@ const messageWrapperElementClassName = 'wrapper-message';
 const guildsWrapperElementClassName = 'wrapper-guilds';
 
 async function getMessages(before, channelId) {
-  return fetch(`${API_URL}/messages?before=${before}&channel=${channelId}`)
+  return fetch(`${API_URL}/messages?channel=${channelId}${before?'&before='+before:''}`)
     .then((response) => response.json());
 }
 async function getGuilds() {
@@ -18,11 +18,12 @@ async function loadGuilds() {
       document.location.search = `channel=${channel.id}&guild=${guild.id}`;
       loadMessages();
     });
+    console.log(channelButtonElement)
     return channelButtonElement;
   };
   const createGuildElement = (data) => {
     const { guild, channels = [] } = data;
-    const filteredChannels = channels.filter((channel) => channel.type === 'text');
+    const filteredChannels = channels.filter((channel) => channel.type === 'GUILD_TEXT');
     const guildButtonElement = $(`<button id="${guild.id}">${guild.name}</button>`);
     const guildWrapperElement = $(`.${guildsWrapperElementClassName}`);
     const guildButtonClickEventHandler = (event) => {
@@ -49,6 +50,7 @@ async function loadGuilds() {
   if (selectedGuildId) $(`#${selectedGuildId}`).click();
 }
 async function loadMessages({ before } = {}) {
+  console.log(before);
   const messages = await getMessages(before, getChannelId());
   const [lastMessage] = [...messages].reverse();
   messages.forEach((message) => {
@@ -183,7 +185,7 @@ function getChannelId() {
     if (name === 'channel') return true;
     return false;
   });
-
+  if(!channelParameter)return;
   const [, channelId] = channelParameter.split('=');
   return channelId;
 }
@@ -195,7 +197,7 @@ function getSearchParameter(parameter) {
     if (name === parameter) return true;
     return false;
   });
-
+  if(!channelParameter)return;
   const [, channelId] = channelParameter.split('=');
   return channelId;
 }

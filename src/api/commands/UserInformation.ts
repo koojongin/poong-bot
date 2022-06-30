@@ -51,11 +51,11 @@ async function execute({ msg, client, actionMessage }) {
   const userId = StreamUtilService.convertByNickname(actionMessage);
   try {
     const embedMessage = await getUserInfoMessage(userId);
-    return msg.reply(embedMessage);
+    return msg.reply({ embeds: [embedMessage] });
   } catch (error) {
     if (error?.response?.statusCode !== 400) return msg.reply(error.message);
     const { savedUserId, description: embedMessage } = await getSearchedUserMessage(userId);
-    msg.reply(embedMessage);
+    msg.reply({ embeds: [embedMessage] });
     return execute({ msg, client, actionMessage: savedUserId });
   }
 }

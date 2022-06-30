@@ -4,7 +4,8 @@
   "description": "test",
   "main": "src/index.js",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.json && npm run copystatic",
+    "copystatic": "copyfiles ./static/* ./dist",
     "startup": "npm run build && npm run pm2",
     "start": "npx ts-node src/index.ts",
     "pm2": "pm2 start ./pm2.config.json"
@@ -23,6 +24,7 @@
     "@discordjs/voice": "^0.10.0",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.6",
+    "copyfiles": "^2.4.1",
     "cron": "^1.8.2",
     "discord.js": "^13.8.1",
     "dotenv": "^8.6.0",

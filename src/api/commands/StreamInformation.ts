@@ -34,7 +34,7 @@ async function execute({ msg, client, actionMessage }) {
     }
   }
 
-  await msg.reply(embedMessage);
+  await msg.reply({ embeds: [embedMessage] });
   if (savedUserId && isLive) {
     return execute({ msg, client, actionMessage: savedUserId });
   }

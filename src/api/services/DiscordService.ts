@@ -1,9 +1,8 @@
 import * as StreamUtilService from './StreamUtilService';
 import * as TwitchAPIService from './TwitchAPIService';
 import * as CONSTANT from '../../config/constants';
-import * as Discord from 'discord.js';
-import moment from 'moment/moment';
 import { MessageEmbed } from 'discord.js';
+import moment from 'moment/moment';
 
 async function getStreamByUser({ userIdOrNicknameShotcut }) {
   const userId = StreamUtilService.convertByNickname(userIdOrNicknameShotcut) || CONSTANT.DEFAULT_USERID;
