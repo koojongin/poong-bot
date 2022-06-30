@@ -22,19 +22,31 @@ async function execute({ msg, client, actionMessage }) {
   if (!dictionary) return msg.reply(`등록되지 않은 단어입니다.`);
 
   const { author } = msg;
-  const { username, id, avatar, avatarURL, discriminator } = author;
+  const { username, id, avatar, discriminator } = author;
 
-  const user = await User.findOne({ id });
-  dictionary.userId = user.id;
-  if (!user) {
-    const foundUser = await new User({ username, id, avatar, avatarURL, discriminator }).save();
-    dictionary.userId = foundUser.id;
+  const user =
+    (await User.findOne({ id })) ||
+    (await new User({ username, id, avatar, avatarURL: author.avatarURL(), discriminator }).save());
+
+  if (
+    user.avatar != avatar ||
+    user.username != username ||
+    user.discriminator != discriminator ||
+    user.avatarURL != author.avatarURL()
+  ) {
+    user.avatar = avatar;
+    user.avatarURL = author.avatarURL();
+    user.username = username;
+    user.discriminator = discriminator;
+    user.updatedAt = new Date();
   }
 
+  dictionary.userId = user.id;
   dictionary.content = content;
   dictionary.updatedAt = new Date();
 
   const { title } = await dictionary.save();
+  await user.save();
 
   msg.reply(`[${title}] 정상적으로 덮어씌웠습니다.`);
 }

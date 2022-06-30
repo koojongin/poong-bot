@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 async function connect() {
-  const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@poong-bot.6v9a0.mongodb.net/?retryWrites=true&w=majority`;
+  const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@poong-bot.6v9a0.mongodb.net/poong-bot?retryWrites=true&w=majority`;
   const connection = await mongoose.connect(uri);
   return connection;
 }

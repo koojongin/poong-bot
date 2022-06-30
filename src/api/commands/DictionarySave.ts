@@ -22,11 +22,11 @@ async function execute({ msg, client, actionMessage }) {
   if (dictionary) return msg.reply(`이미 등록되어있는 단어입니다.`);
 
   const { author } = msg;
-  const { username, id, avatar, avatarURL, discriminator } = author;
+  const { username, id, avatar, discriminator } = author;
 
   const user = await User.findOne({ id });
   if (!user) {
-    await new User({ username, id, avatar, avatarURL, discriminator }).save();
+    await new User({ username, id, avatar, avatarURL: author.avatarURL(), discriminator }).save();
   }
   const newDictionary = new Dictionary({
     title: searchTitle,

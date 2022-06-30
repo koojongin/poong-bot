@@ -11,13 +11,16 @@ export interface IDictionary {
   //virtual fields
   user?: IUser;
 }
-const schema = new Schema<IDictionary>({
-  title: { type: String },
-  content: { type: String },
-  createdAt: { type: Date, default: new Date() },
-  updatedAt: { type: Date, default: new Date() },
-  userId: { type: String, required: true },
-});
+const schema = new Schema<IDictionary>(
+  {
+    title: { type: String },
+    content: { type: String },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+    userId: { type: String, required: true },
+  },
+  { versionKey: false }
+);
 
 schema.virtual('user', {
   ref: 'User',
