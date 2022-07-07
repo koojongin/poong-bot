@@ -14,7 +14,7 @@ import { setClient } from './api/services/StreamService';
   setClient(client);
   const otherClients = [];
   if (process.env.ENV !== 'HEROKU') {
-    const kooBotClient = await Promise.all([DiscordService.listen(process.env.DISCORD_TOKEN_KOO)]);
+    const kooBotClient = await DiscordService.listen(process.env.DISCORD_TOKEN_KOO);
     otherClients.push(kooBotClient);
   }
   await BatchService.watchTwitchStreaming();

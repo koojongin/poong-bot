@@ -4,6 +4,7 @@ import 'moment-duration-format';
 import { getStreamByUser } from '../services/DiscordService';
 import * as UserInformationCommand from './UserInformation';
 import { getSearchedUserMessage } from '../services/TwitchUtilService';
+import { MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 
@@ -34,7 +35,11 @@ async function execute({ msg, client, actionMessage }) {
     }
   }
 
-  await msg.reply({ embeds: [embedMessage] });
+  if (embedMessage instanceof MessageEmbed) {
+    await msg.reply({ embeds: [embedMessage] });
+  } else {
+    await msg.reply(embedMessage);
+  }
   if (savedUserId && isLive) {
     return execute({ msg, client, actionMessage: savedUserId });
   }

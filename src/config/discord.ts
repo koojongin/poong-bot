@@ -38,10 +38,16 @@ async function listen(token = process.env.DISCORD_TOKEN) {
   const TRASH_CHANNEL_ID = '750320503339876475';
   const resolved = new Promise((resolve) => {
     client.on('ready', () => {
-      console.log('discord client on ready');
+      const { user } = client;
+      const { username } = user;
+      console.log('discord client on ready :::', username);
+
+      const POONG_BOT_USERNAME = 'poong-bot';
+      if (username !== POONG_BOT_USERNAME) {
+        return resolve(client);
+      }
       const botNotificationChannel: TextChannel = client.channels.cache.get(TRASH_CHANNEL_ID) as TextChannel;
       botNotificationChannel.send(`봇on!${new Date().toLocaleDateString()}${new Date().toLocaleTimeString()}`);
-
       client.user.setPresence({
         activities: [
           {

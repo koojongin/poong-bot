@@ -1,5 +1,6 @@
 import express from 'express';
 import * as http from 'http';
+import _ from 'lodash';
 
 function listenServer({ port = 3000, client, otherClients }) {
   //
@@ -25,7 +26,7 @@ function listenServer({ port = 3000, client, otherClients }) {
   const BOUND_GENERAL_CHANNEL_ID = '259295776063225866';
   const MY_GUILD_ID = '683252977183621169';
   app.get('/guilds', (req, res) => {
-    const getResultFromClient = (client) => {
+    const getGuildsFromClient = (client) => {
       const { guilds } = client;
       const result = guilds.cache
         .filter((data) => data.id !== MY_GUILD_ID)
@@ -36,8 +37,9 @@ function listenServer({ port = 3000, client, otherClients }) {
       return result;
     };
 
-    const results = getResultFromClient(client).concat(...otherClients.map((client) => getResultFromClient(client)));
-    return res.send(results);
+    const guildsOfOtherClient = _.flatten(otherClients.map((client) => getGuildsFromClient(client)));
+    const guilds = [...getGuildsFromClient(client), ...guildsOfOtherClient];
+    return res.send(guilds);
   });
   app.get('/messages', async (req, res) => {
     const { before, channel: channelId } = req.query;

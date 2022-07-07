@@ -107,9 +107,9 @@ async function watchTwitchStreaming() {
   const job = new CronJob(
     '0 */1 12-23 * * *',
     async () => {
-      awakeHeroku();
+      if (process.env.ENV == 'HEROKU') awakeHeroku();
       watchStreamer.forEach((streamerId) => {
-        if (!isPauseListening) getStreamInformation(streamerId);
+        if (!isPauseListening() && process.env.ENV !== 'HEROKU') getStreamInformation(streamerId);
       });
     },
     null,
