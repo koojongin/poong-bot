@@ -1,6 +1,7 @@
 import express from 'express';
 import * as http from 'http';
 import _ from 'lodash';
+import { dictionaryRouter } from '../api/routes/dictionary';
 
 function listenServer({ port = 3000, client, otherClients }) {
   //
@@ -19,6 +20,8 @@ function listenServer({ port = 3000, client, otherClients }) {
   //
   // Routes
   //
+
+  app.use('/dictionary', dictionaryRouter);
   app.get('/auth', (req, res) => {
     res.send({});
   });
@@ -43,6 +46,7 @@ function listenServer({ port = 3000, client, otherClients }) {
   });
   app.get('/messages', async (req, res) => {
     const { before, channel: channelId } = req.query;
+    if (!channelId) return res.status(400).send('Bad Request');
     const limit = 100;
 
     const allClients = [client, ...otherClients];
@@ -50,8 +54,10 @@ function listenServer({ port = 3000, client, otherClients }) {
       const { channels } = client;
       return channels.cache.toJSON().filter((channel) => channel?.id === channelId).length > 0;
     });
+
+    if (!selectedClient) return res.send('Not Found Channels');
     const { channels } = selectedClient;
-    const query: { limit: number; before?: number } = { limit };
+    const query: { limit: number; before?: any } = { limit };
 
     if (before) query.before = before;
     let originMessages;

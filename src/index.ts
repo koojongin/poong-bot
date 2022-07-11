@@ -18,5 +18,9 @@ import { setClient } from './api/services/StreamService';
     otherClients.push(kooBotClient);
   }
   await BatchService.watchTwitchStreaming();
-  listenServer({ client, otherClients });
+  try {
+    listenServer({ client, otherClients });
+  } catch (e) {
+    console.log(e);
+  }
 })();
