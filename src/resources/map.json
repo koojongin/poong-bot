@@ -1,0 +1,1340 @@
+[
+  {
+    "code": 10804,
+    "name": "갈기파도 항구",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 10422,
+    "name": "갈라진 땅",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 50011,
+    "name": "갈망의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50002,
+    "name": "거대버섯 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50070,
+    "name": "거북 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10724,
+    "name": "거울 계곡",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10363,
+    "name": "거울의 미궁 [던전]",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 11313,
+    "name": "검은모루 작업장",
+    "world": 11,
+    "floor": 1
+  },
+  {
+    "code": 50030,
+    "name": "검은이빨의 주둔지",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50056,
+    "name": "격류의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10815,
+    "name": "격전의 평야",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 11152,
+    "name": "고대 유적 엘베리아 [던전]",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 11151,
+    "name": "고르곤의 둥지 [던전]",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 50073,
+    "name": "고립된 영원의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50001,
+    "name": "고블린 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50050,
+    "name": "고요의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50085,
+    "name": "고요한 안식의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10851,
+    "name": "광휘의 능선 [던전]",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 10852,
+    "name": "교회당 지하 [던전]",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 10222,
+    "name": "국경지대",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 10913,
+    "name": "그늘진 절벽",
+    "world": 8,
+    "floor": 1
+  },
+  {
+    "code": 50076,
+    "name": "그릇된 욕망의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50094,
+    "name": "그림자달 시장",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50021,
+    "name": "그림자의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11351,
+    "name": "기막힌 양조장 [던전]",
+    "world": 11,
+    "floor": 1
+  },
+  {
+    "code": 11315,
+    "name": "기약의 땅",
+    "world": 11,
+    "floor": 1
+  },
+  {
+    "code": 50088,
+    "name": "기약의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50081,
+    "name": "기회의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50067,
+    "name": "꿈꾸는 갈매기 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50130,
+    "name": "꿈꾸는 추억의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50060,
+    "name": "나루니 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11451,
+    "name": "나스카 온천 [던전]",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 10423,
+    "name": "네벨호른",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 50062,
+    "name": "노토스 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11401,
+    "name": "니아 마을",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 50061,
+    "name": "니헬타로프의 상념",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11012,
+    "name": "달콤한 숲",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 10721,
+    "name": "델파이 현",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 50041,
+    "name": "도망자들의 마을",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10253,
+    "name": "독발톱 도굴단 동굴 [던전]",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 50010,
+    "name": "두키 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50109,
+    "name": "두키 주식회사",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10722,
+    "name": "등나무 언덕",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10816,
+    "name": "디오리카 평원",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 11101,
+    "name": "라니아 마을",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 10892,
+    "name": "라스트라 숲 [던전]",
+    "world": 6,
+    "floor": 2
+  },
+  {
+    "code": 10820,
+    "name": "라이아 단구",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 11714,
+    "name": "레갸르방크 대평원",
+    "world": 14,
+    "floor": 1
+  },
+  {
+    "code": 10201,
+    "name": "레온하트",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 10812,
+    "name": "레이크바",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 10211,
+    "name": "로그힐",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 10366,
+    "name": "로아룬",
+    "world": 2,
+    "floor": 3
+  },
+  {
+    "code": 50072,
+    "name": "로팡 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10801,
+    "name": "루테란 성",
+    "world": 6,
+    "floor": 2
+  },
+  {
+    "code": 10301,
+    "name": "리겐스 마을",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 50043,
+    "name": "리베하임",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10426,
+    "name": "리제 폭포",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 10761,
+    "name": "만월의 고택 [던전]",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10324,
+    "name": "머무른 시간의 호수",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 50042,
+    "name": "메데이아",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10813,
+    "name": "메드리닉 수도원",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 50025,
+    "name": "메르시아",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10421,
+    "name": "메마른 통로",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 50014,
+    "name": "메테오라",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50046,
+    "name": "메투스 제도",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10691,
+    "name": "모라이 유적 [던전]",
+    "world": 4,
+    "floor": 1
+  },
+  {
+    "code": 50128,
+    "name": "모코모코 야시장",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11001,
+    "name": "모코코 마을",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 50063,
+    "name": "몬테 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10372,
+    "name": "몽환의 궁전 [던전]",
+    "world": 2,
+    "floor": 5
+  },
+  {
+    "code": 50065,
+    "name": "몽환의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50095,
+    "name": "무릉도원",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50055,
+    "name": "무법자의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11314,
+    "name": "무쇠망치 작업장",
+    "world": 11,
+    "floor": 1
+  },
+  {
+    "code": 11312,
+    "name": "미완의 정원",
+    "world": 11,
+    "floor": 2
+  },
+  {
+    "code": 50098,
+    "name": "미지의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50101,
+    "name": "바다의 요람 페르마타",
+    "world": 16,
+    "floor": 5
+  },
+  {
+    "code": 11011,
+    "name": "바다향기 숲",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 10424,
+    "name": "바람결 구릉지",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 10368,
+    "name": "바람향기 언덕",
+    "world": 2,
+    "floor": 1
+  },
+  {
+    "code": 10362,
+    "name": "바에단의 은신처 [던전]",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 11115,
+    "name": "발란카르 산맥",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 50097,
+    "name": "발푸르기스",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 59011,
+    "name": "발푸르기스의 밤 [던전]",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10818,
+    "name": "배꽃나무 자생지",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 11114,
+    "name": "베르닐 삼림",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 11102,
+    "name": "베른 성",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 11612,
+    "name": "벨리온 유적지",
+    "world": 13,
+    "floor": 1
+  },
+  {
+    "code": 11412,
+    "name": "별모래 해변",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 50007,
+    "name": "별빛 등대의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10821,
+    "name": "보레아 영지",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 50009,
+    "name": "볼라르 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50068,
+    "name": "부서진 빙하의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10914,
+    "name": "붉은 달의 흔적",
+    "world": 8,
+    "floor": 2
+  },
+  {
+    "code": 10428,
+    "name": "붉은 모래 사막",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 50084,
+    "name": "붐블링 아일랜드",
+    "world": 16,
+    "floor": 2
+  },
+  {
+    "code": 50069,
+    "name": "블루홀 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50012,
+    "name": "비밀기지 X-301",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 59005,
+    "name": "비밀스러운 연구실 [던전]",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11414,
+    "name": "비밀의 숲",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 50020,
+    "name": "비키니 아일랜드",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50120,
+    "name": "비탄의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10814,
+    "name": "빌브린 숲",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 10764,
+    "name": "사령의 동굴 [던전]",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10651,
+    "name": "사피라 동굴 [던전]",
+    "world": 4,
+    "floor": 1
+  },
+  {
+    "code": 10611,
+    "name": "살란드 구릉지",
+    "world": 4,
+    "floor": 1
+  },
+  {
+    "code": 10765,
+    "name": "삶과 죽음의 경계 [던전]",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10313,
+    "name": "서리감옥 고원",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 10351,
+    "name": "서클사이드 [던전]",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 11013,
+    "name": "성큼바위 숲",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 50008,
+    "name": "세월의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10723,
+    "name": "소리의 숲",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 50114,
+    "name": "속삭이는 작은 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50087,
+    "name": "수라도",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10401,
+    "name": "슈테른",
+    "world": 3,
+    "floor": 3
+  },
+  {
+    "code": 50127,
+    "name": "스노우팡 아일랜드",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50024,
+    "name": "스피다 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50079,
+    "name": "슬라임 아일랜드",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11311,
+    "name": "시작의 땅",
+    "world": 11,
+    "floor": 1
+  },
+  {
+    "code": 50049,
+    "name": "신월의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10252,
+    "name": "아길로스의 꼬리 [던전]",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 10251,
+    "name": "아길로스의 머리 [던전]",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 50018,
+    "name": "아르곤",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11811,
+    "name": "아리안오브",
+    "world": 15,
+    "floor": 1
+  },
+  {
+    "code": 10462,
+    "name": "아이히만의 연구기지 [던전]",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 50096,
+    "name": "아트로포스",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50016,
+    "name": "안개의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10220,
+    "name": "안게모스 산 기슭",
+    "world": 0,
+    "floor": 1
+  },
+  {
+    "code": 50080,
+    "name": "알라케르",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50013,
+    "name": "알트아이젠",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11411,
+    "name": "얕은 바닷길",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 50129,
+    "name": "어그러진 안개의 숲",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11711,
+    "name": "어금니의 강",
+    "world": 14,
+    "floor": 1
+  },
+  {
+    "code": 10321,
+    "name": "얼어붙은 바다",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 50017,
+    "name": "얼음 미로의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50019,
+    "name": "얼음과 불의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10325,
+    "name": "얼음나비 절벽",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 50039,
+    "name": "에라스모의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50023,
+    "name": "에버그레이스의 둥지",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50078,
+    "name": "에스텔라",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10463,
+    "name": "에어가이츠 [던전]",
+    "world": 3,
+    "floor": 3
+  },
+  {
+    "code": 10370,
+    "name": "엘조윈의 그늘",
+    "world": 2,
+    "floor": 1
+  },
+  {
+    "code": 10762,
+    "name": "연의 결계 [던전]",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 11452,
+    "name": "오레하의 우물 [던전]",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 50077,
+    "name": "오르비스 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11352,
+    "name": "오만의 방주 [던전]",
+    "world": 11,
+    "floor": 2
+  },
+  {
+    "code": 10619,
+    "name": "오즈혼 구릉지",
+    "world": 4,
+    "floor": 1
+  },
+  {
+    "code": 50038,
+    "name": "왜곡된 차원의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50032,
+    "name": "외로운 섬 오페르",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50045,
+    "name": "우거진 갈대의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10912,
+    "name": "울부짖는 늪지대",
+    "world": 8,
+    "floor": 1
+  },
+  {
+    "code": 11713,
+    "name": "웅크린 늑대의 땅",
+    "world": 14,
+    "floor": 1
+  },
+  {
+    "code": 11301,
+    "name": "위대한 성",
+    "world": 11,
+    "floor": 1
+  },
+  {
+    "code": 10367,
+    "name": "유리연꽃 호수",
+    "world": 2,
+    "floor": 1
+  },
+  {
+    "code": 10365,
+    "name": "은빛물결 호수",
+    "world": 2,
+    "floor": 1
+  },
+  {
+    "code": 10911,
+    "name": "이름 없는 협곡",
+    "world": 8,
+    "floor": 1
+  },
+  {
+    "code": 50029,
+    "name": "잊혀진 자들의 도시",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10811,
+    "name": "자고라스 산",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 50034,
+    "name": "자유의 섬",
+    "world": 16,
+    "floor": 2
+  },
+  {
+    "code": 50037,
+    "name": "작은 행운의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50131,
+    "name": "잔혹한 장난감 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50006,
+    "name": "잠자는 노래의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10763,
+    "name": "적의 결계 [던전]",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10461,
+    "name": "전투 개미 둥지 [던전]",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 10371,
+    "name": "정령의 땅 [던전]",
+    "world": 2,
+    "floor": 1
+  },
+  {
+    "code": 10962,
+    "name": "죄악의 동굴 [던전]",
+    "world": 8,
+    "floor": 1
+  },
+  {
+    "code": 50036,
+    "name": "죽음의 협곡",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50075,
+    "name": "지고의 섬",
+    "world": 16,
+    "floor": 2
+  },
+  {
+    "code": 50102,
+    "name": "지스브로이",
+    "world": 16,
+    "floor": 2
+  },
+  {
+    "code": 50048,
+    "name": "지혜의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50091,
+    "name": "짙은 안개 능선",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11014,
+    "name": "침묵하는 거인의 숲",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 50035,
+    "name": "카마인의 주둔지",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11611,
+    "name": "칸다리아 영지",
+    "world": 13,
+    "floor": 1
+  },
+  {
+    "code": 10312,
+    "name": "칼날바람 언덕",
+    "world": 1,
+    "floor": 1
+  },
+  {
+    "code": 10901,
+    "name": "칼라자 마을",
+    "world": 8,
+    "floor": 2
+  },
+  {
+    "code": 50015,
+    "name": "칼트헤르츠",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50126,
+    "name": "쿵덕쿵 아일랜드",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10854,
+    "name": "크라잉스톰 [던전]",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 10491,
+    "name": "크라테르의 심장 [던전]",
+    "world": 3,
+    "floor": 2
+  },
+  {
+    "code": 11111,
+    "name": "크로나 항구",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 10823,
+    "name": "크로커니스 해변",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 50086,
+    "name": "클럽 아비뉴",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 59026,
+    "name": "탄식의 정원 [던전]",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50082,
+    "name": "태초의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50003,
+    "name": "토토실버 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11052,
+    "name": "토토이크 몸 속 [던전]",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 50004,
+    "name": "토토피아",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10412,
+    "name": "토트리치",
+    "world": 3,
+    "floor": 1
+  },
+  {
+    "code": 11413,
+    "name": "티카티카 군락지",
+    "world": 12,
+    "floor": 1
+  },
+  {
+    "code": 10369,
+    "name": "파괴된 제나일",
+    "world": 2,
+    "floor": 1
+  },
+  {
+    "code": 11112,
+    "name": "파르나 숲",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 50064,
+    "name": "판다 푸푸 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11113,
+    "name": "페스나르 고원",
+    "world": 10,
+    "floor": 1
+  },
+  {
+    "code": 10961,
+    "name": "폐허가 된 고성 [던전]",
+    "world": 8,
+    "floor": 3
+  },
+  {
+    "code": 50022,
+    "name": "포르투나",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50027,
+    "name": "포르페",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50040,
+    "name": "포모나 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50093,
+    "name": "푸른 바람의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11813,
+    "name": "필레니소스 산",
+    "world": 15,
+    "floor": 1
+  },
+  {
+    "code": 50066,
+    "name": "하모니 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50054,
+    "name": "하얀파도 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10701,
+    "name": "항구도시 창천",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 10817,
+    "name": "해무리 언덕",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 50033,
+    "name": "해바라기의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50028,
+    "name": "해상 낙원 페이토",
+    "world": 16,
+    "floor": 5
+  },
+  {
+    "code": 50047,
+    "name": "해적마을 아틀라스",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 11051,
+    "name": "해적소굴 [던전]",
+    "world": 9,
+    "floor": 1
+  },
+  {
+    "code": 11812,
+    "name": "헤스테라 정원",
+    "world": 15,
+    "floor": 1
+  },
+  {
+    "code": 50090,
+    "name": "혹한의 안식처",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50005,
+    "name": "환각의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50092,
+    "name": "환영나비 섬",
+    "world": 16,
+    "floor": 2
+  },
+  {
+    "code": 50118,
+    "name": "환죽도",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50083,
+    "name": "황금물결 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50089,
+    "name": "황혼의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10725,
+    "name": "황혼의 연무",
+    "world": 5,
+    "floor": 1
+  },
+  {
+    "code": 59009,
+    "name": "황혼의 예배당 [던전]",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50026,
+    "name": "회상의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10855,
+    "name": "회색 망치 광산 [던전]",
+    "world": 7,
+    "floor": 1
+  },
+  {
+    "code": 50031,
+    "name": "휴양지 그라비스",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 10819,
+    "name": "흑장미 교회당",
+    "world": 6,
+    "floor": 1
+  },
+  {
+    "code": 50071,
+    "name": "희망의 섬",
+    "world": 16,
+    "floor": 1
+  },
+  {
+    "code": 50074,
+    "name": "히프노스의 눈",
+    "world": 16,
+    "floor": 1
+  }
+]

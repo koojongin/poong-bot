@@ -4,6 +4,7 @@
     "./node_modules/@types"
   ],
   "compilerOptions": {
+    "resolveJsonModule": true,
     "allowJs": true,
     "skipLibCheck": true,
     "baseUrl": "./",
