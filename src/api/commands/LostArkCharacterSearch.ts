@@ -3,42 +3,10 @@ import 'moment-timezone';
 import got from 'got';
 import cheerio from 'cheerio';
 import { MessageEmbed } from 'discord.js';
+import { LoawaResponseBody } from '../interfaces/lostark.interface';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['로아'];
-interface CharListItem {
-  icon: string;
-  name: string;
-  job: string;
-  clv: string;
-}
-interface CollectionItem {
-  name: string; //오르페우스의별
-  npc: string; //파우니카 - 알비온
-  max: number; // 9
-  count: number; // 1
-}
-interface LoawaResponseBody {
-  info: {
-    character: {
-      info: {
-        server: string; //아만
-        job: string; //기상술사
-      };
-      alignment: string[]; //성형 4개 [1,1,1,1] // 지성/담력/매력/친절
-      각인효과: {
-        engrave: string; //원한
-        level: string; //3
-      }[];
-    };
-    account: {
-      charList: CharListItem[];
-    };
-    collectionTypeList: CollectionItem[];
-  };
-  updateTimeInfo: string; //2분전 검색
-  status: number;
-}
 async function execute({ msg, client, actionMessage }) {
   if (!actionMessage) return msg.reply('아이디를 입력해주세요.');
   const dataURI = `https://lostark.game.onstove.com/Profile/Character/` + actionMessage;
@@ -116,12 +84,6 @@ async function execute({ msg, client, actionMessage }) {
   );
   embedMessage.setDescription(description.join('\n'));
   msg.reply({ embeds: [embedMessage] });
-}
-
-function findTextAndReturnRemainder(target, variable) {
-  const chopFront = target.substring(target.search(variable));
-  const result = chopFront.substring(variable.length, chopFront.search(';'));
-  return result;
 }
 
 export { execute, commands };

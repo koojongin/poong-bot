@@ -23,6 +23,7 @@ import * as DictionaryUpdate from './DictionaryUpdate';
 import * as DictionaryDelete from './DictionaryDelete';
 import * as LostArkMokoko from './LostArkMokoko';
 import * as LostArkCharacterSearch from './LostArkCharacterSearch';
+import * as LostArkGoldSearch from './LostArkGoldSearch';
 
 const commands = {
   ShowCommands,
@@ -51,6 +52,8 @@ const commands = {
   DictionaryDelete,
   LostArkMokoko,
   LostArkCharacterSearch,
+  LostArkGoldSearch,
+  // LostArkTradeSearch,
 };
 
 const mapping = (command) => {
