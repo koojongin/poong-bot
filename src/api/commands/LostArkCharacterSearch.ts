@@ -3,7 +3,7 @@ import 'moment-timezone';
 import got from 'got';
 import cheerio from 'cheerio';
 import { MessageEmbed } from 'discord.js';
-import { LoawaResponseBody } from '../interfaces/lostark.interface';
+import { LoawaGoldResponseBody, LoawaResponseBody } from '../interfaces/lostark.interface';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['로아'];
@@ -15,10 +15,28 @@ async function execute({ msg, client, actionMessage }) {
     got.get(dataURI),
     got.get(dataURILoawa, { headers: { 'x-requested-with': 'XMLHttpRequest' } }),
   ]);
+
   const rootElement = cheerio.load(response.body).root();
   const { info, updateTimeInfo }: LoawaResponseBody = JSON.parse(responseLoawa.body);
-  const { character } = info;
+  const {
+    character,
+    account: { id: accountId },
+  } = info;
   const { info: cInfo, 각인효과 } = character;
+
+  const dataURILoawaGold = `https://loawa.com/apis/char/account-chars`;
+  const responseLoawaGoldResponse: any = await got.post(dataURILoawaGold, {
+    headers: { 'x-requested-with': 'XMLHttpRequest' },
+    json: {
+      account_id: accountId,
+    },
+    responseType: 'json',
+  });
+  const {
+    body: { goldAcc, result },
+  }: { body: LoawaGoldResponseBody } = responseLoawaGoldResponse;
+
+  const searchedAccount = result.find((account) => account.char_name == actionMessage);
   const { collectionTypeList } = info;
   const profileUrl = rootElement.find('.profile-equipment__character img').attr('src');
   const classImageUrl = rootElement.find('.profile-character-info__img').attr('src');
@@ -45,7 +63,7 @@ async function execute({ msg, client, actionMessage }) {
 
   const embedMessage = new MessageEmbed();
   embedMessage.setImage(profileUrl);
-  embedMessage.setThumbnail(classImageUrl);
+  embedMessage.setThumbnail(searchedAccount?.icon || classImageUrl);
   embedMessage.setURL(dataURI);
   embedMessage.setTitle(`${cInfo.server} 서버 - ${actionMessage} [${cInfo.job}]`);
   embedMessage.addField('원정대 레벨', expeditionLevel, true);
