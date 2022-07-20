@@ -1,21 +1,9 @@
-import {
-  BaseCommandInteraction,
-  Client,
-  Intents,
-  MessageActionRow,
-  MessageComponentInteraction,
-  MessageSelectMenu,
-  Modal,
-  ModalActionRowComponent,
-  TextChannel,
-  TextInputComponent,
-} from 'discord.js';
+import { Client, Intents, TextChannel } from 'discord.js';
 import * as COMMAND from '../api/commands';
 import moment from 'moment';
-import { setClient } from '../api/services/StreamService';
 import { isPauseListening, setPauseListening } from './config';
 import { BOT_COMMAND_PREFIX, MY_SERVER_GUILD_ID } from './constants';
-import create from 'got/dist/source/create';
+import * as LostArkCharacterSearch from '../api/commands/LostArkCharacterSearch';
 
 function createClient() {
   return new Client({
@@ -61,7 +49,16 @@ async function listen(token = process.env.DISCORD_TOKEN) {
     });
   });
 
-  client.on('interactionCreate', async (interaction) => {});
+  client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isSelectMenu()) return;
+    const { values } = interaction;
+    const message: any = interaction.message;
+    // message.edit({ embeds: [message.embeds] });
+    await LostArkCharacterSearch.execute({ msg: message, client, actionMessage: values[0] });
+    await interaction.deferReply();
+    await interaction.deleteReply();
+    //
+  });
   client.on('messageCreate', async (msg) => {
     const { user: clientUser } = client;
     const { username: clientUserName, id: clientId } = clientUser;

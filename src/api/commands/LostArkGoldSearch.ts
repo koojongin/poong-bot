@@ -4,10 +4,11 @@ import got from 'got';
 import { Client, Message, MessageEmbed } from 'discord.js';
 import { LoawaAccount, LoawaGoldResponseBody, LoawaResponseBody } from '../interfaces/lostark.interface';
 import _ from 'lodash';
+import { IExecuteCommand } from '../interfaces/discord.interface';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['로아골드'];
-async function execute({ msg, client, actionMessage }: { msg: Message; client: Client; actionMessage: string }) {
+async function execute({ msg, client, actionMessage }: IExecuteCommand) {
   if (!actionMessage) return msg.reply('아이디를 입력해주세요.');
   const embedMessage = new MessageEmbed();
   embedMessage.setTitle(`${actionMessage}님의 주간 원정대 수입`);

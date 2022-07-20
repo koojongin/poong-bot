@@ -13,6 +13,29 @@ export interface CollectionItem {
 export interface LoawaResponseBody {
   info: {
     character: {
+      jewels: [
+        {
+          icon: string; //; "EFUI_IconAtlas/Use/Use_11_10.png",
+          grade: number; //; 3,
+          name: string; //; "5레벨 멸화의 보석 (귀속)",
+          level: number; //; 5,
+          desc: string; //; "",
+          skill: string; //; "",
+          itemCode: string; //; "65021050",
+          type: string; //; "멸화",
+          skillInfo: {
+            isExist: boolean; // false
+            name_ko: string; // ""
+          };
+          values: string; //
+        }
+      ];
+      CardSet: [
+        {
+          desc: string; // '암속성 피해 감소 +10.00%';
+          title: string; // '세상을 구하는 빛 2세트';
+        }
+      ];
       info: {
         server: string; //아만
         job: string; //기상술사
