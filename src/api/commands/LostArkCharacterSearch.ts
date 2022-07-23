@@ -5,6 +5,7 @@ import cheerio from 'cheerio';
 import { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } from 'discord.js';
 import { LoawaGoldResponseBody, LoawaResponseBody } from '../interfaces/lostark.interface';
 import { IExecuteCommand } from '../interfaces/discord.interface';
+import _ from 'lodash';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['로아'];
@@ -146,16 +147,27 @@ async function execute({ msg, client, actionMessage }: IExecuteCommand) {
     if (charList.length == 0) return null;
     const row = new MessageActionRow();
     const selectMenu = new MessageSelectMenu();
+    const mergedAccount = charList.map((account) => {
+      const fullAccount = result.find((rAccount) => rAccount.char_name == account.name);
+      const mixedAccount = { ...account, ...fullAccount };
+      mixedAccount.maxLevel = parseFloat(mixedAccount.maxlv);
+      return mixedAccount;
+    });
     selectMenu.setCustomId('select');
     selectMenu.addOptions(
-      charList.map((account) => {
-        const { name } = account;
-        return {
-          label: name,
-          value: name,
-        };
-      })
+      _.sortBy(mergedAccount, 'maxLevel')
+        .reverse()
+        .slice(0, 24)
+        .map((account) => {
+          const { jobs, maxlv, name, server_name } = account;
+          return {
+            label: name,
+            value: name,
+            description: `${server_name} - ${jobs} - Lv.${maxlv}`,
+          };
+        })
     );
+
     row.addComponents([selectMenu]);
     return row;
   };

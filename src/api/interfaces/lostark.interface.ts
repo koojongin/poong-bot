@@ -98,3 +98,20 @@ export interface LoawaGoldResponseBody {
     }[];
   };
 }
+
+export interface LoawaRankSearchResponse {
+  result: RankAccount[];
+}
+
+export interface RankAccount {
+  char_name: string; // '1850';
+  server_name: string; // '니나브';
+  jobs: string; // '블레이드';
+  guild: string; // 'LoaUser';
+  maxlv: string; // '1,615.00';
+  equipset: string; // '<span class="text-grade5">6 사멸</span>';
+  mainseal: string; // '잔재된 기운 <span class="text-grade4">Lv.3</span>';
+  rank: string; // '20';
+  donation_icon: string; // '';
+  link: string; // 'https://loawa.com/char/1850';
+}

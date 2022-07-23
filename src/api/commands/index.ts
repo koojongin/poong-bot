@@ -8,7 +8,6 @@ import * as GetClipPerWeek from './GetClipPerWeek';
 import * as GetClipPerMonth from './GetClipPerMonth';
 import * as PopularStream from './PopularStream';
 import * as GetVideos from './GetVideos';
-import * as ShortCutStreamerNickname from './ShortCutStreamerNickname';
 import * as ShowTogether from './ShowTogether';
 import * as ShowUptime from './ShowUptime';
 import * as ShowHotclip from './ShowHotclip';
@@ -24,6 +23,7 @@ import * as DictionaryDelete from './DictionaryDelete';
 import * as LostArkMokoko from './LostArkMokoko';
 import * as LostArkCharacterSearch from './LostArkCharacterSearch';
 import * as LostArkGoldSearch from './LostArkGoldSearch';
+import * as LostArkRankSearch from './LostArkRankSearch';
 
 const commands = {
   ShowCommands,
@@ -37,7 +37,7 @@ const commands = {
   GetClipPerMonth,
   PopularStream,
   GetVideos,
-  ShortCutStreamerNickname,
+  // ShortCutStreamerNickname,
   ShowTogether,
   ShowUptime,
   ShowHotclip,
@@ -53,6 +53,7 @@ const commands = {
   LostArkMokoko,
   LostArkCharacterSearch,
   LostArkGoldSearch,
+  LostArkRankSearch,
   // LostArkTradeSearch,
 };
 

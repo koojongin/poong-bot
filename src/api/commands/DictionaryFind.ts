@@ -21,7 +21,7 @@ async function execute({ msg, client, actionMessage }) {
     $or: [{ title: { $regex: searchTitle, $options: 'i' } }, { userId: { $in: userIds } }],
   };
   const count = await Dictionary.find(searchQuery).count();
-  const dicts = await Dictionary.find(searchQuery).limit(10).populate('user');
+  const dicts = await Dictionary.find(searchQuery).limit(10).populate('user').sort({ createdAt: -1 });
   const dictRows = dicts.map((dict) => {
     const { title, content, user } = dict;
     const { username, discriminator } = user;
