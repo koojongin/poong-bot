@@ -9,6 +9,12 @@ import _ from 'lodash';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['로아'];
+export const loadLostArkCharacterHTML = async (characterName) => {
+  const dataURI = `https://lostark.game.onstove.com/Profile/Character/` + characterName;
+  const response = await got.get(dataURI);
+  return response.body;
+};
+
 async function execute({ msg, client, actionMessage }: IExecuteCommand) {
   if (!actionMessage) return msg.reply('아이디를 입력해주세요.');
   const getMessage = async () => {
@@ -30,8 +36,8 @@ async function execute({ msg, client, actionMessage }: IExecuteCommand) {
 
   const rootElement = cheerio.load(response.body).root();
   const { info, updateTimeInfo }: LoawaResponseBody = JSON.parse(responseLoawa.body);
+  if (!info) return message.edit({ embeds: [], content: '조회가 불가능한 캐릭터입니다.' });
   const { character, account } = info;
-
   const { id: accountId, charList } = account;
   const { info: cInfo, 각인효과, jewels, CardSet: cardSet } = character;
 

@@ -7,6 +7,7 @@ import { LoawaGoldResponseBody, LoawaRankSearchResponse, LoawaResponseBody } fro
 import { IExecuteCommand } from '../interfaces/discord.interface';
 import _ from 'lodash';
 import { BOT_COMMAND_PREFIX } from '../../config/constants';
+import { loadLostArkCharacterHTML } from './LostArkCharacterSearch';
 
 moment.tz.setDefault('Asia/Seoul');
 
@@ -43,7 +44,7 @@ async function execute({ msg, client, actionMessage }: IExecuteCommand) {
   if (!LOSTARK_JOBS.includes(actionMessage))
     return msg.reply(
       [
-        `${actionMessage} - 검색 불가능한 클래스입니다.`,
+        `클래스를 입력해주세요. 예: ${BOT_COMMAND_PREFIX}${commands[0]} 블레이드`,
         '<검색 가능한 클래스 목록>',
         LOSTARK_JOBS.map((text) => `\`${text}\``).join(' '),
       ].join('\n')
@@ -64,33 +65,83 @@ async function execute({ msg, client, actionMessage }: IExecuteCommand) {
     got.get(dataURI, { headers: { 'x-requested-with': 'XMLHttpRequest' }, searchParams: { 'jobs[]': actionMessage } }),
   ]);
 
-  // const rootElement = cheerio.load(response.body).root();
   const { result }: LoawaRankSearchResponse = JSON.parse(response.body);
   const rankUsers = result.map((account) => {
     const { char_name: characterName, equipset, mainseal, maxlv } = account;
     const equipsetElement = cheerio.load(equipset);
     const mainsealElement = cheerio.load(mainseal);
-    const equips = equipsetElement('span').map((i, node) => equipsetElement(node).text());
-
+    const equips = equipsetElement('.text-grade5').map((i, node) => equipsetElement(node).text());
+    const mainSealString = mainsealElement.root().text();
+    const splitPoint = mainSealString.indexOf('Lv') + 4;
+    const regex = new RegExp(`(.{${splitPoint}})`);
+    const result = mainSealString.split(regex).filter((O) => O);
     return {
-      equips,
+      equips: [...equips],
       characterName,
       maxLevel: parseFloat(maxlv.replace(',', '')),
-      mainSeal: mainsealElement.root().text(),
+      mainSeal: result.map((i) => `\`${i.replace('Lv.', '')}\``).join(' '), //mainsealElement.root().text(),
     };
   });
   const embedMessage = new MessageEmbed();
-  const description = [
-    ...rankUsers.slice(0, 10).map((account, index) => {
-      const { characterName, maxLevel, equips, mainSeal } = account;
-      const equipsString = equips.toArray().map((equip) => {
-        return `\`${equip}\``;
-      });
-      return `${index + 1}. ${characterName}[Lv.${maxLevel}] ${equipsString.join(' ')} ${mainSeal}`;
-    }),
-  ];
+  const createDescription = (rankUsers) => {
+    const description = [
+      ...rankUsers.slice(0, 10).map((account, index) => {
+        const { characterName, maxLevel, equips, mainSeal } = account;
+        const equipsString = equips.map((equip) => {
+          return `\`${equip}\``;
+        });
+
+        const characterDesc = [`${index + 1}. ${characterName}[Lv.${maxLevel}] ${equipsString.join(' ')} ${mainSeal}`];
+        if (account.ability) {
+          characterDesc.push(
+            '> ' + account.ability.map((ability) => `${ability.name}(${ability.value})`).join(' | ') + ''
+          );
+        }
+        return characterDesc.join('\n');
+      }),
+    ];
+    return description;
+  };
+
   embedMessage.setTitle(`상위 ${actionMessage} 클래스 10명의 통계 데이터입니다.`);
-  embedMessage.setDescription(description.join('\n'));
+  embedMessage.setDescription(createDescription(rankUsers).join('\n'));
+  await message.edit({ embeds: [embedMessage] });
+
+  const userFetchPromises = rankUsers.map((r) => loadLostArkCharacterHTML(r.characterName));
+  const responses = await Promise.all(userFetchPromises);
+  const getAbilities = (responses) => {
+    return responses.map((html) => {
+      const profileHtml = cheerio.load(html);
+      const abilityElements = profileHtml.root().find('.profile-ability-battle > ul > li');
+      const ability = _.sortBy(
+        abilityElements.toArray().map((element) => {
+          const name = profileHtml(element).find('span:nth-child(1)').text();
+          const value = profileHtml(element).find('span:nth-child(2)').text();
+          return { name, value: parseInt(value) };
+        }),
+        'value'
+      ).reverse();
+      return ability;
+    });
+  };
+  // const html = await loadLostArkCharacterHTML(rankUsers[0].characterName);
+  // const profileHtml = cheerio.load(html);
+  // const abilityElements = profileHtml.root().find('.profile-ability-battle > ul > li');
+  // const ability = _.sortBy(
+  //   abilityElements.toArray().map((element) => {
+  //     const name = profileHtml(element).find('span:nth-child(1)').text();
+  //     const value = profileHtml(element).find('span:nth-child(2)').text();
+  //     return { name, value: parseInt(value) };
+  //   }),
+  //   'value'
+  // ).reverse();
+  const abilities = getAbilities(responses);
+  const rankUsersWithAbility = [...rankUsers].map((_user, index) => {
+    const user = { ..._user, ability: abilities[index] };
+    return user;
+  });
+
+  embedMessage.setDescription(createDescription(rankUsersWithAbility).join('\n'));
   await message.edit({ embeds: [embedMessage] });
 }
 
