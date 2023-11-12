@@ -21,13 +21,14 @@
   },
   "homepage": "https://github.com/koojongin/poongbot#readme",
   "dependencies": {
+    "14": "^3.1.6",
     "@discordjs/voice": "^0.10.0",
     "@types/jsdom": "^16.2.14",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.6",
     "copyfiles": "^2.4.1",
     "cron": "^1.8.2",
-    "discord.js": "^13.8.1",
+    "discord.js": "^14.13.0",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "form-data": "^4.0.0",
@@ -48,10 +49,11 @@
     "babel-eslint": "^10.1.0",
     "eslint": "8.01",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "jquery": "^3.6.0",
     "nodemon": "^2.0.7",
     "pm2": "^5.2.0",
     "ts-node": "^10.8.0",
-    "typescript": "^4.4.3"
+    "typescript": "^5.2.2"
   }
 }

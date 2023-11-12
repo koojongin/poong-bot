@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js';
+import { Message, EmbedBuilder } from 'discord.js';
 import moment from 'moment';
 import * as TwitchAPIService from '../services/TwitchAPIService';
 import * as BotUtilService from '../services/BotUtilService';
@@ -7,11 +7,11 @@ import * as CONSTANT from '../../config/constants';
 
 import 'moment-timezone';
 import { getSearchedUserMessage } from '../services/TwitchUtilService';
-import { Message, MessageActionRow, MessageEmbed, MessageSelectMenu, ModalActionRowComponent } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const result = {};
 const commands = ['다시보기'];
+
 async function sendReplayList(videoList, user, msg: Message, opts) {
   const options = Object.assign(opts, {});
   const { userId } = options;
@@ -44,7 +44,7 @@ async function sendReplayList(videoList, user, msg: Message, opts) {
     return streamContainerString;
   });
 
-  const embedMessage = new MessageEmbed()
+  const embedMessage = new EmbedBuilder()
     .setColor('#51ace8')
     .setTitle(`${user.display_name || userId} 최근 다시보기 목록`)
     // .setThumbnail(user.profile_image_url)
@@ -71,6 +71,7 @@ async function sendReplayList(videoList, user, msg: Message, opts) {
 
   return msg.reply({ embeds: [embedMessage] });
 }
+
 async function getReplayOne(video, user, opts) {
   const options = Object.assign(opts, {});
   const { pageIndex = 0 } = options;
@@ -95,16 +96,20 @@ async function getReplayOne(video, user, opts) {
     const playtime = moment.utc(duration).format('HH:mm:ss');
     description += `\n${index + 1}. ${chapterName} \`${playtime}\``;
   });
-  const embedMessage = new MessageEmbed()
+  const embedMessage = new EmbedBuilder()
     .setColor('#51ace8')
     .setImage(thumbnail)
     .setTitle(video.title)
     .setThumbnail(user.profile_image_url)
-    .setDescription(description).setFooter(`
+    .setDescription(description)
+    .setFooter({
+      text: `
                 최근 다시보기중 ${pageIndex + 1}번째 영상입니다.
-            `);
+            `,
+    });
   return { embedMessage };
 }
+
 async function execute({ msg, client, actionMessage }) {
   const [actionMessageOfUserId, selectedPage, ...actions] = actionMessage.split(' ');
   let userId = StreamUtilService.convertByNickname(actionMessageOfUserId) || CONSTANT.DEFAULT_USERID;

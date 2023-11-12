@@ -1,22 +1,15 @@
-import { Client, Intents, TextChannel } from 'discord.js';
+import { Client, Interaction, TextChannel } from 'discord.js';
 import * as COMMAND from '../api/commands';
 import moment from 'moment';
 import { isPauseListening, setPauseListening } from './config';
 import { BOT_COMMAND_PREFIX, MY_SERVER_GUILD_ID } from './constants';
-import * as LostArkCharacterSearch from '../api/commands/LostArkCharacterSearch';
 
 function createClient() {
   return new Client({
     allowedMentions: {
       repliedUser: false,
     },
-    intents: [
-      Intents.FLAGS.GUILDS,
-      Intents.FLAGS.GUILD_MEMBERS,
-      Intents.FLAGS.GUILD_INVITES,
-      Intents.FLAGS.GUILD_MESSAGES,
-      Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-    ],
+    intents: ['Guilds', 'GuildMembers', 'GuildInvites', 'GuildMessages', 'GuildMessageReactions', 'MessageContent'],
   });
 }
 
@@ -40,7 +33,7 @@ async function listen(token = process.env.DISCORD_TOKEN) {
         activities: [
           {
             name: `${BOT_COMMAND_PREFIX}명령`,
-            type: 'PLAYING',
+            // type: 'PLAYING',
           },
         ],
       });
@@ -49,12 +42,16 @@ async function listen(token = process.env.DISCORD_TOKEN) {
     });
   });
 
-  client.on('interactionCreate', async (interaction) => {
-    if (!interaction.isSelectMenu()) return;
-    const { values } = interaction;
-    const message: any = interaction.message;
+  client.on('interactionCreate', async (interaction: Interaction | any) => {
+    const { customId } = interaction;
+    const interactionInstance = COMMAND.interactions.find((cInteraction) => {
+      return cInteraction.customId == customId;
+    });
+    if (!interactionInstance) return;
+    await interactionInstance.action(interaction);
+    // const message: any = interaction.message;
     // message.edit({ embeds: [message.embeds] });
-    await LostArkCharacterSearch.execute({ msg: message, client, actionMessage: values[0] });
+    // await LostArkCharacterSearch.execute({ msg: message, client, actionMessage: values[0] });
     await interaction.deferReply();
     await interaction.deleteReply();
     //
@@ -72,9 +69,9 @@ async function listen(token = process.env.DISCORD_TOKEN) {
       guild: { name: guildName },
     } = channel as TextChannel;
     const { username } = author;
-    console.log(
-      `[${guildName}-#${channelName}]${username}[${new Date(createdTimestamp).toLocaleString()}] : ${content}`
-    );
+    // console.log(
+    //   `[${guildName}-#${channelName}]${username}[${new Date(createdTimestamp).toLocaleString()}] : ${content}`
+    // );
     if (msg.content === 'ping') {
       await msg.reply('pong');
     }
@@ -91,7 +88,10 @@ async function listen(token = process.env.DISCORD_TOKEN) {
     }
 
     if (process.env.ENV === 'HEROKU' && isPauseListening()) return;
+    if (msg.author.bot) return;
+    console.log(msg.content);
     if (msg.content.indexOf('-') !== 0) return;
+    if (guildName.includes('Bot Repo')) return;
     const splittedMessage = msg.content.split(' ');
     const command = splittedMessage.splice(0, 1).toString().replace(BOT_COMMAND_PREFIX, '');
     const actionMessage = splittedMessage.join(' ');

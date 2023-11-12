@@ -1,9 +1,8 @@
-import * as Discord from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 import moment from 'moment';
 import 'moment-timezone';
 import got from 'got';
 import { getMovie } from '../services/NaverAPIService';
-import { MessageEmbed } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['박스오피스'];
@@ -68,7 +67,7 @@ async function execute({ msg, client, actionMessage }) {
       }% | ${parseInt(movie.showCnt).toLocaleString()}`;
       description += '\n';
     });
-    const embedMessage = new MessageEmbed()
+    const embedMessage = new EmbedBuilder()
       .setTitle(`${boxofficeType} ${showRange}`)
       .setDescription(description)
       .setAuthor(msg.author.username);
@@ -96,7 +95,7 @@ function getMovieEmbedMessage({ movie }) {
   description += '\n';
   description += `${link}`;
   description += '\n';
-  const embedMessage = new MessageEmbed()
+  const embedMessage = new EmbedBuilder()
     .setColor('#51ace8')
     // .setImage(`${fullImage}?v=${new Date().getTime()}`)
     .setThumbnail(image)

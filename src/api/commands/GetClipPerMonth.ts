@@ -5,7 +5,7 @@ import * as CONSTANT from '../../config/constants';
 import * as StreamUtilService from '../services/StreamUtilService';
 import 'moment-timezone';
 import _ from 'lodash';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 const commands = ['클립월'];
@@ -35,13 +35,16 @@ async function execute({ msg, client, actionMessage }) {
   const datum = data[selectedIndex];
   if (!datum)
     return msg.reply(`${user.display_name || userId}님의 클립이 없습니다. 총 ${data.length.toLocaleString()}개의 클립`);
-  const embedMessage = new MessageEmbed()
+  const embedMessage = new EmbedBuilder()
     .setColor('#51ace8')
     .setImage(datum.thumbnail_url)
     .setTitle(`[월간핫클립] ${selectedIndex + 1}. ${datum.title}`)
-    .setThumbnail(user.profile_image_url).setFooter(`
+    .setThumbnail(user.profile_image_url)
+    .setFooter({
+      text: `
                     클립생성일 ${moment(datum.created_at).format('YYYY-MM-DD HH:mm:ss')}
-                `);
+                `,
+    });
 
   let description = '';
   description += `클립제작:\`${datum.creator_name}\` / 조회수:${datum.view_count.toLocaleString()}`;

@@ -4,7 +4,7 @@ import 'moment-duration-format';
 import { getStreamByUser } from '../services/DiscordService';
 import * as UserInformationCommand from './UserInformation';
 import { getSearchedUserMessage } from '../services/TwitchUtilService';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 moment.tz.setDefault('Asia/Seoul');
 
@@ -35,7 +35,7 @@ async function execute({ msg, client, actionMessage }) {
     }
   }
 
-  if (embedMessage instanceof MessageEmbed) {
+  if (embedMessage instanceof EmbedBuilder) {
     await msg.reply({ embeds: [embedMessage] });
   } else {
     await msg.reply(embedMessage);

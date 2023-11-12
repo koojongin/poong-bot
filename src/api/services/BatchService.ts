@@ -8,7 +8,6 @@ import { getStreamByUser } from './DiscordService';
 
 import http from 'http';
 import { isPauseListening } from '../../config/config';
-import { ChannelTypes } from 'discord.js/typings/enums';
 import { MY_SERVER_GUILD_ID } from '../../config/constants';
 
 moment.tz.setDefault('Asia/Seoul');
@@ -21,11 +20,9 @@ const watchStreamer = [
   'ok_ja',
   'saddummy',
   'lovelyyeon',
-  '109ace',
-  'beyou0728',
-  'kss7749',
-  'zilioner',
-  'hatsalsal',
+  // '109ace',
+  // 'kss7749',
+  // 'zilioner',
   'noizemasta',
   'handongsuk',
   'suddenddong',

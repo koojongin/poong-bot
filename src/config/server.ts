@@ -9,7 +9,9 @@ function listenServer({ port = 3000, client, otherClients }) {
   //
   const app = express();
   // const bodyParser = require('body-parser')
-
+  app.use(function (req, res, next) {
+    next();
+  });
   app.use(express.static('static'));
   // parse application/x-www-form-urlencoded
   // app.use(bodyParser.urlencoded({extended: false}));

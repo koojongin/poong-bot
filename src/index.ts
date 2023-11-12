@@ -9,13 +9,13 @@ import { setClient } from './api/services/StreamService';
 (async () => {
   dotenv.config();
   await setTwitchOAuth2Token();
-  await connect();
+  // await connect();
   const client = await DiscordService.listen();
   setClient(client);
   const otherClients = [];
   if (process.env.ENV !== 'HEROKU') {
-    const kooBotClient = await DiscordService.listen(process.env.DISCORD_TOKEN_KOO);
-    otherClients.push(kooBotClient);
+    // const kooBotClient = await DiscordService.listen(process.env.DISCORD_TOKEN_KOO);
+    // otherClients.push(kooBotClient);
   }
   await BatchService.watchTwitchStreaming();
   try {

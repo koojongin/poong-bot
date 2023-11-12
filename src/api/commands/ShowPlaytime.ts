@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 import moment from 'moment';
 import 'moment-timezone';
 import * as PlaytimeService from '../services/PlaytimeService';
@@ -31,7 +31,7 @@ async function execute({ msg, client, actionMessage }) {
   });
 
   if (elements.length === 0) return msg.reply(`검색결과가 없습니다. \`${actionMessage}\``);
-  const embedMessage = new MessageEmbed();
+  const embedMessage = new EmbedBuilder();
   let desc = '.\n';
   desc += elements
     .map((element, index) => {

@@ -1,8 +1,8 @@
 import * as StreamUtilService from './StreamUtilService';
 import * as TwitchAPIService from './TwitchAPIService';
 import * as CONSTANT from '../../config/constants';
-import { MessageEmbed } from 'discord.js';
 import moment from 'moment/moment';
+import { EmbedBuilder, Message } from 'discord.js';
 
 async function getStreamByUser({ userIdOrNicknameShotcut }) {
   const userId = StreamUtilService.convertByNickname(userIdOrNicknameShotcut) || CONSTANT.DEFAULT_USERID;
@@ -66,7 +66,7 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
       }\``;
     });
   }
-  const embedMessage = new MessageEmbed()
+  const embedMessage = new EmbedBuilder()
     .setColor('#51ace8')
     .setImage(`${videoThumbnailUrl.replace('{width}', '1920').replace('{height}', '1080')}?v=${new Date().getTime()}`)
     .setThumbnail(boxArtUrl)

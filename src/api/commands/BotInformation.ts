@@ -1,16 +1,17 @@
-import Discord, { MessageEmbed } from 'discord.js';
+import { Client, EmbedBuilder, Message } from 'discord.js';
 import moment from 'moment';
 import 'moment-timezone';
+import _ from 'lodash';
 
 moment.tz.setDefault('Asia/Seoul');
 
 const commands = ['서버'];
 
-async function execute({ msg, client, actionMessage }) {
+async function execute({ msg, client, actionMessage }: { msg: Message; client: Client; actionMessage }) {
   const guildsCache = client.guilds.cache;
-  const guilds = guildsCache.toJSON();
+  const guilds = _.sortBy(guildsCache.toJSON(), 'joinedTimestamp');
 
-  const embedMessage = new MessageEmbed();
+  const embedMessage = new EmbedBuilder();
   const description = '';
   const parsedData = guilds.map((guild, index) => {
     const { name, id, joinedTimestamp, memberCount } = guild;

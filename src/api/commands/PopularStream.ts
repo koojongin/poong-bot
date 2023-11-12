@@ -4,7 +4,7 @@ import * as TwitchAPIService from '../services/TwitchAPIService';
 import * as CONSTANT from '../../config/constants';
 import 'moment-timezone';
 import _ from 'lodash';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 const BOT_COMMAND_PREFIX = '-';
 
@@ -28,7 +28,7 @@ async function execute({ msg, client, actionMessage }) {
   const { edges: liveStreams } = streams;
 
   if (actionMessage === '') {
-    const embedMessage = new MessageEmbed();
+    const embedMessage = new EmbedBuilder();
 
     const streamData = liveStreams.splice(0, 30).map((stream, index) => {
       const { previewImageURL, title, id, viewersCount, broadcaster, game } = stream.node;
@@ -52,7 +52,7 @@ async function execute({ msg, client, actionMessage }) {
 
     msg.reply({ embeds: [embedMessage] });
   } else {
-    const embedMessage = new MessageEmbed()
+    const embedMessage = new EmbedBuilder()
       .setColor('#51ace8')
       .setTitle(`트위치 실시간 시청자수 TOP ${skip + 1}~${(page + 1) * limit}`);
     // .setImage(data.offline_image_url)
