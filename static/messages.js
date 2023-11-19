@@ -4,12 +4,12 @@ const messageWrapperElementClassName = 'wrapper-message';
 const guildsWrapperElementClassName = 'wrapper-guilds';
 
 async function getMessages(before, channelId) {
-  return fetch(`${API_URL}/messages?channel=${channelId}${before?'&before='+before:''}`)
-    .then((response) => response.json());
+  return fetch(`${API_URL}/messages?channel=${channelId}${before ? '&before=' + before : ''}`).then((response) =>
+    response.json()
+  );
 }
 async function getGuilds() {
-  return fetch(`${API_URL}/guilds`)
-    .then((response) => response.json());
+  return fetch(`${API_URL}/guilds`).then((response) => response.json());
 }
 async function loadGuilds() {
   const getChannelElement = (channel, guild) => {
@@ -18,12 +18,20 @@ async function loadGuilds() {
       document.location.search = `channel=${channel.id}&guild=${guild.id}`;
       loadMessages();
     });
-    console.log(channelButtonElement)
+    console.log(channelButtonElement);
     return channelButtonElement;
   };
   const createGuildElement = (data) => {
     const { guild, channels = [] } = data;
-    const filteredChannels = channels.filter((channel) => channel.type === 'GUILD_TEXT');
+    const TEXT_CHANNEL_TYPE = 0;
+    const filteredChannels = channels
+      // .map((channel) => {
+      //   const newChannel = {};
+      //   newChannel.type = channel.type;
+      //   newChannel.id = channel.id;
+      //   return newChannel;
+      // })
+      .filter((channel) => channel.type === TEXT_CHANNEL_TYPE);
     const guildButtonElement = $(`<button id="${guild.id}">${guild.name}</button>`);
     const guildWrapperElement = $(`.${guildsWrapperElementClassName}`);
     const guildButtonClickEventHandler = (event) => {
@@ -70,9 +78,7 @@ async function loadMessages({ before } = {}) {
 }
 
 function createMessageDiv(message) {
-  const {
-    content, author, createdTimestamp, attachments, embeds, reactions,
-  } = message;
+  const { content, author, createdTimestamp, attachments, embeds, reactions } = message;
   const { username, avatarURL } = author;
   const div = $(`<div class="${messageWrapperElementClassName}"/>`);
 
@@ -117,9 +123,7 @@ function createMessageDiv(message) {
     return `#${stringColor}`;
   };
   const embedMessage = embeds.map((embed) => {
-    const {
-      description, footer, image = {}, thumbnail, fields, author,
-    } = embed;
+    const { description, footer, image = {}, thumbnail, fields, author } = embed;
     const message = $(`
         <div class="embed-message">
           <div class="embed-desc">${description || ''}</div>
@@ -131,7 +135,8 @@ function createMessageDiv(message) {
     if (image?.url) imageElement.append(`<img src="${image.url}" width="${image.width >= 500 ? 500 : image.width}" >`);
 
     const descElement = message.find('.embed-desc');
-    if (thumbnail?.url) descElement.append(`<img width="${thumbnail.width >= 500 ? 500 : thumbnail.width}" src="${thumbnail.url}">`);
+    if (thumbnail?.url)
+      descElement.append(`<img width="${thumbnail.width >= 500 ? 500 : thumbnail.width}" src="${thumbnail.url}">`);
     if (fields && fields.length !== 0) {
       descElement.prepend($('<div class="embed-fields"></div>'));
       const fieldsElement = message.find('.embed-fields');
@@ -143,8 +148,11 @@ function createMessageDiv(message) {
     }
     if (author) {
       const { icon_url, name, url } = author;
-      message.append(`<div class='embed-author' style="display:flex;align-items: center"><a target="_blank" href="${url}">${name}</a></div>`);
-      if (icon_url) message.find('.embed-author').prepend(`<img style="margin-right:6px" width="30" src="${icon_url}"/>`);
+      message.append(
+        `<div class='embed-author' style="display:flex;align-items: center"><a target="_blank" href="${url}">${name}</a></div>`
+      );
+      if (icon_url)
+        message.find('.embed-author').prepend(`<img style="margin-right:6px" width="30" src="${icon_url}"/>`);
     }
 
     const footerElement = message.find('.embed-footer');
@@ -185,7 +193,7 @@ function getChannelId() {
     if (name === 'channel') return true;
     return false;
   });
-  if(!channelParameter)return;
+  if (!channelParameter) return;
   const [, channelId] = channelParameter.split('=');
   return channelId;
 }
@@ -197,7 +205,7 @@ function getSearchParameter(parameter) {
     if (name === parameter) return true;
     return false;
   });
-  if(!channelParameter)return;
+  if (!channelParameter) return;
   const [, channelId] = channelParameter.split('=');
   return channelId;
 }

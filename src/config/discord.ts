@@ -89,7 +89,9 @@ async function listen(token = process.env.DISCORD_TOKEN) {
 
     if (process.env.ENV === 'HEROKU' && isPauseListening()) return;
     if (msg.author.bot) return;
-    console.log(msg.content);
+    console.log(
+      `[${guildName}-#${channelName}]${username}[${new Date(createdTimestamp).toLocaleString()}] : ${content}`
+    );
     if (msg.content.indexOf('-') !== 0) return;
     if (guildName.includes('Bot Repo')) return;
     const splittedMessage = msg.content.split(' ');

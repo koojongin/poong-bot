@@ -71,9 +71,7 @@ async function getStreamInformation(userId) {
     }
   }
 
-  const { embedMessage } = await getStreamByUser({ userIdOrNicknameShotcut: user_login });
-
-  const send = async (selectedChannel) => {
+  const send = async (selectedChannel, embedMessage) => {
     const startAfterMinutes = moment().diff(started_at) / (1000 * 60);
     if (startAfterMinutes <= 5 && !!selectedChannel) {
       selectedChannel.send(`${user_name} 뱅온`);
@@ -85,15 +83,17 @@ async function getStreamInformation(userId) {
     };
   };
 
-  selectedChannels
-    .filter((channel) => !!channel)
-    .forEach((channel) => {
-      try {
-        send(channel);
-      } catch (error) {
-        console.log(error);
-      }
-    });
+  try {
+    const { embedMessage } = await getStreamByUser({ userIdOrNicknameShotcut: user_login });
+    selectedChannels
+      .filter((channel) => !!channel)
+      .forEach((channel) => {
+        send(channel, embedMessage);
+      });
+  } catch (error) {
+    console.log(error);
+    return;
+  }
 }
 
 async function awakeHeroku() {

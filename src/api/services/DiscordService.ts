@@ -41,7 +41,12 @@ async function getStreamByUser({ userIdOrNicknameShotcut }) {
     const videoId = datum.id;
     const { data: previewData }: any = await TwitchAPIService.getPreviewCardByVideo(videoId);
     const { video } = previewData;
-    const { id, moments } = video;
+    if (!video) {
+      console.log(video);
+      return;
+    }
+
+    const { id, moments } = video || {};
     const { edges } = moments;
 
     edges.forEach((edge, index) => {

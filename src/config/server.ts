@@ -30,7 +30,8 @@ function listenServer({ port = 3000, client, otherClients }) {
 
   const BOUND_GENERAL_CHANNEL_ID = '259295776063225866';
   const MY_GUILD_ID = '683252977183621169';
-  app.get('/guilds', (req, res) => {
+  app.get('/guilds', async (req, res) => {
+    const result = await client.guilds.fetch();
     const getGuildsFromClient = (client) => {
       const { guilds } = client;
       const result = guilds.cache
@@ -64,19 +65,20 @@ function listenServer({ port = 3000, client, otherClients }) {
     if (before) query.before = before;
     let originMessages;
     try {
-      const messages = await channels
-        .fetch(channelId)
-        .then((channel) => channel.messages.fetch(query))
-        .then((messages) =>
-          messages.map((_message) => {
-            originMessages = messages;
-            const message = { ..._message };
-            message.author = message.author.toJSON();
-            message.embeds = message.embeds.map((data) => data.toJSON());
-            return message;
-          })
-        );
-      return res.send(messages);
+      const { guild } = await channels.fetch(channelId);
+      const { channels: fetchedChannel } = guild;
+      const [channel] = fetchedChannel._cache.toJSON().filter((c) => c.id == channelId);
+      const { messages } = channel;
+      const loadedMessages = await messages.fetch(query);
+
+      const resultMessages = loadedMessages.map((_message) => {
+        originMessages = messages;
+        const message = { ..._message };
+        message.author = message.author.toJSON();
+        message.embeds = message.embeds.map((data) => data.toJSON());
+        return message;
+      });
+      return res.send(resultMessages);
     } catch (error) {
       console.error(error);
       return res.send(error.message);
